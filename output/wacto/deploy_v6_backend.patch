@@ -1,0 +1,142 @@
+--- live/models/WactoSession.js
++++ new/models/WactoSession.js
+@@ -7,7 +7,8 @@
+ 
+ const wactoSessionSchema = new mongoose.Schema({
+   phone: { type: String, required: true, unique: true },   // 10-digit mobile
+-  awaiting: { type: String, enum: ['epic', 'name', null], default: null },
++  // epic/name: typed input expected · choice: "What next?" sent · schemes: typed scheme numbers expected
++  awaiting: { type: String, enum: ['epic', 'name', 'choice', 'schemes', null], default: null },
+   voter: { type: mongoose.Schema.Types.Mixed, default: null }, // from the voter roll after a typed EPIC
+   name: { type: String, default: '' },                       // typed name (no-EPIC path)
+   district: { type: String, default: '' },
+--- live/constants/wactoFlowLabels.js
++++ new/constants/wactoFlowLabels.js
+@@ -1,7 +1,8 @@
+ /**
+- * Labels the BJP WACTO chatbot shows as list rows. Generated from the WACTO export
+- * "exported_chatbot (25).json" — the backend recognises taps by these exact titles,
+- * so regenerate this file whenever district/assembly/scheme rows change in the flow.
++ * Labels the BJP WACTO chatbot shows as list rows. Generated from the flow
++ * "BJP_Schemes/output/wacto/bjp_nalam_thittam_v6_en.json" (built by gen_v6.py) — the backend
++ * recognises taps by these exact titles, so regenerate this file whenever
++ * district/assembly/scheme rows change in the flow.
+  */
+ const DISTRICT_ASSEMBLIES = {
+   "Ariyalur": [
+@@ -324,7 +325,7 @@
+   "PMJJBY",
+   "Jan Dhan",
+   "PM-POSHAN Tracker",
+-  "Ayushman Bharat",
++  "Ayushman Bharat / CMCHIS",
+   "Ayushman 70+",
+   "PM Kisan",
+   "PM Matru Vandana",
+--- live/controllers/bjpWactoController.js
++++ new/controllers/bjpWactoController.js
+@@ -3,10 +3,12 @@
+  *
+  * WACTO forwards every incoming WhatsApp message (Meta webhook format) to
+  *   POST /api/whatsapp/bjp-wacto/events?key=<BJP_WACTO_WEBHOOK_KEY>
+- * WACTO's flow nodes send the menu, the EPIC choice and the district/assembly
+- * pickers. Everything after that is sent from here through the WACTO API:
+- * the EPIC prompt, "What next?" (only after a verified EPIC or a tapped
+- * assembly), the scheme list pages, Done, volunteer and the returning-user options.
++ * WACTO's flow nodes send the menu, the EPIC choice, the district/assembly pickers
++ * and the scheme list pages (page 1 opens on the "Pick Schemes" button title via a
++ * node keyword — WACTO rejects list messages sent through its API). Sent from here:
++ * the EPIC prompt, "What next?" buttons (only after a verified EPIC or a tapped
++ * assembly), scheme-pick confirmations, Done, volunteer, the returning-user options,
++ * and a typed-number scheme list when BJP_WACTO_SCHEME_PICKER=typed.
+  *
+  * WACTO taps arrive as LABEL text (WACTO never sends node ids); taps on the
+  * buttons/rows sent from here also carry our own `bjp:` ids.
+@@ -223,7 +225,7 @@
+ }
+ 
+ // Scheme picker page, built from the live Scheme collection (rows use the real names).
+-async function sendSchemePage(phone, page) {
++async function sendSchemePage(phone, page, mobile) {
+   const all = await activeSchemes();
+   const pages = Math.max(1, Math.ceil(all.length / SCHEMES_PER_PAGE));
+   const p = Math.min(Math.max(1, page || 1), pages);
+@@ -238,11 +240,28 @@
+       action: { button: 'Choose', sections: [{ title: clip(`Schemes — Page ${p}`, 24), rows }] },
+     });
+   } catch (err) {
+-    console.error('[BJP WACTO] scheme list rejected:', err.message);
+-    await sendWactoText(phone, '⚠️ Sorry, the scheme list could not be shown. Please tap *Pick Schemes* again in a minute.');
++    console.error('[BJP WACTO] scheme list rejected, sending typed list:', err.message);
++    if (mobile) await saveSession(mobile, { awaiting: 'schemes' });
++    await sendTypedSchemeList(phone);
+   }
+ }
+ 
++// How the scheme list is shown after "Pick Schemes":
++//   wacto (default) — WACTO's own list pages (WACTO accepts no list messages from the API:
++//                     "Invalid Interactive type", 2026-10-09)
++//   typed           — numbered text list, user replies "4, 9, 12" (proven mechanics)
++//   list            — backend list message (kept for when WACTO supports it)
++function schemePicker() {
++  const m = String(process.env.BJP_WACTO_SCHEME_PICKER || 'wacto').toLowerCase();
++  return ['wacto', 'typed', 'list'].includes(m) ? m : 'wacto';
++}
++
++async function sendTypedSchemeList(phone) {
++  const all = await activeSchemes();
++  const lines = all.map((s, i) => `${i + 1}. *${s.name}* — ${clip(s.benefit, 60)}`).join('\n');
++  return sendWactoText(phone, `📋 *Select Schemes*\n\nReply with the numbers you want — e.g. *4, 9, 12*\n\n${lines}\n\nReply *DONE* when you're finished.`);
++}
++
+ async function addPickedScheme(phone, mobile, session, scheme) {
+   const picked = (session && session.schemes) || [];
+   if (picked.includes(scheme.name)) return sendWactoText(phone, `*${scheme.name}* is already in your list.`);
+@@ -280,6 +299,24 @@
+     return handleTap(phone, mobile, CHOICE_DIGITS[text], '', session, profileName);
+   }
+ 
++  // Typed scheme picker: "4, 9, 12" adds schemes; "done" finishes.
++  if (session.awaiting === 'schemes') {
++    if (/^done$/i.test(text)) return handleTap(phone, mobile, L.done, '', session, profileName);
++    const all = await activeSchemes();
++    const nums = text.split(/[^0-9]+/).filter(Boolean).map(Number);
++    const bad = !nums.length || nums.some((n) => n < 1 || n > all.length);
++    if (bad) return sendWactoText(phone, `❌ Please reply with scheme numbers between *1* and *${all.length}* — e.g. *4, 9, 12* — or *DONE* to finish.`);
++    const picked = [...(session.schemes || [])];
++    const added = [];
++    for (const n of nums) {
++      const name = all[n - 1].name;
++      if (!picked.includes(name)) { picked.push(name); added.push(name); }
++    }
++    await saveSession(mobile, { schemes: picked });
++    const head = added.length ? `✅ Added: *${added.join('*, *')}*` : 'Those schemes are already in your list.';
++    return sendWactoText(phone, `${head} — ${picked.length} picked so far.\n\nSend more numbers, or reply *DONE* to finish.`);
++  }
++
+   if (session.awaiting === 'epic') {
+     const epic = text.toUpperCase().replace(/[\s-]/g, '');
+     if (!/^[A-Z0-9/]{6,20}$/.test(epic)) {
+@@ -322,7 +359,7 @@
+ 
+ async function handleTap(phone, mobile, label, id, session, profileName) {
+   // Rows/buttons this backend sent carry our own ids — handle those first.
+-  if (id && id.startsWith(ID.page)) return sendSchemePage(phone, parseInt(id.slice(ID.page.length), 10));
++  if (id && id.startsWith(ID.page)) return sendSchemePage(phone, parseInt(id.slice(ID.page.length), 10), mobile);
+   if (id && id.startsWith(ID.scheme)) {
+     const scheme = await Scheme.findOne({ id: Number(id.slice(ID.scheme.length)), active: true }).lean();
+     if (!scheme) return sendWactoText(phone, "⚠️ That scheme isn't available right now. Please pick another one.");
+@@ -397,8 +434,11 @@
+ 
+   if (label === L.pickSchemes || label === L.both) {
+     if (!locationOf(session)) return sendWactoText(phone, noLocationMessage(session));
+-    await saveSession(mobile, { volunteer: label === L.both, awaiting: null });
+-    return sendSchemePage(phone, 1);
++    const picker = schemePicker();
++    await saveSession(mobile, { volunteer: label === L.both, awaiting: picker === 'typed' ? 'schemes' : null });
++    if (picker === 'wacto') return; // WACTO's scheme page 1 opens on this button title (node keyword)
++    if (picker === 'list') return sendSchemePage(phone, 1, mobile);
++    return sendTypedSchemeList(phone);
+   }
+ 
+   if (label === L.volunteerOnly) {

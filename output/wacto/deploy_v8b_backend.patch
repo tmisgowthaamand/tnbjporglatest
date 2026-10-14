@@ -1,0 +1,70 @@
+--- live/controllers/bjpWactoController.js
++++ new/controllers/bjpWactoController.js
+@@ -42,6 +42,7 @@
+   volunteerOnly: 'Volunteer only',
+   both:          'Schemes + Volunteer',
+   done:          '✅ Done Selecting',
++  addMore:       'Add more schemes', // WACTO "Scheme Added" button (v8) → copy of scheme page 1
+   myRegistration:'My Registration',
+   myReferral:    'My Referral Link',
+   myMembers:     'My Members',
+@@ -264,10 +265,32 @@
+ 
+ async function addPickedScheme(phone, mobile, session, scheme) {
+   const picked = (session && session.schemes) || [];
+-  if (picked.includes(scheme.name)) return sendWactoText(phone, `*${scheme.name}* is already in your list.`);
++  // WACTO picker (v8 flow): WACTO's own "✅ Scheme added!" node confirms — record silently.
++  const quiet = schemePicker() === 'wacto';
++  if (picked.includes(scheme.name)) return quiet ? undefined : sendPickedPrompt(phone, picked, `*${scheme.name}* is already in your list.`);
+   const next = [...picked, scheme.name];
+   await saveSession(mobile, { schemes: next });
+-  return sendWactoText(phone, `✅ *${scheme.name}* added — ${next.length} picked so far.\n\nOpen the list again to add more, or tap *✅ Done Selecting*.`);
++  if (quiet) return undefined;
++  return sendPickedPrompt(phone, next, `✅ *${scheme.name}* added.`);
++}
++
++// picker=list only (backend-sent lists): after each pick, [Add more schemes] resends page 1,
++// [✅ Done Selecting] finishes — no need to reopen the list to find Done.
++async function sendPickedPrompt(phone, picked, head) {
++  const body = clip(`${head}\n\nPicked so far (${picked.length}): ${picked.join(', ')}`, 1024);
++  try {
++    await sendWactoInteractive(phone, {
++      type: 'button',
++      body: { text: body },
++      action: { buttons: [
++        { type: 'reply', reply: { id: `${ID.next}more`, title: L.addMore } },
++        { type: 'reply', reply: { id: ID.done, title: L.done } },
++      ] },
++    });
++  } catch (err) {
++    console.error('[BJP WACTO] pick buttons rejected, sending text:', err.message);
++    await sendWactoText(phone, `${body}\n\nOpen the list again to add more, or tap *✅ Done Selecting*.`);
++  }
+ }
+ const NEED_NAME = '⚠️ First type your *full name* in the chat and send it.\n\nThen tap *Continue ✅* again.';
+ 
+@@ -450,6 +473,12 @@
+     return sendWactoText(phone, `✅ *Volunteer application submitted!*\n\nThe Super Admin will review it. Tap *Be a Volunteer* in the menu any time to see the status.\n\n🔗 Invite others: ${SITE}/?ref=${user.referralCode}`);
+   }
+ 
++  if (label === L.addMore) {
++    // v8 flow: WACTO's edge opens the copy of page 1; only the "list" picker needs us.
++    if (schemePicker() === 'list') return sendSchemePage(phone, 1, mobile);
++    return;
++  }
++
+   if (label === L.done) {
+     if (!locationOf(session)) return sendWactoText(phone, noLocationMessage(session));
+     const picked = session.schemes || [];
+@@ -484,7 +513,10 @@
+   // Assembly of the chosen district (checked first: e.g. "Dindigul" is both), else a district.
+   if (session && session.district && (DISTRICT_ASSEMBLIES[session.district] || []).includes(label)) {
+     await saveSession(mobile, { assembly: label, voter: null });
+-    return sendWhatNext(phone, mobile, '📍 *Almost done!*');
++    // v8b flow: the assembly row's WACTO edge sends "What next?" (no EPIC to gate here).
++    // Older flows had no such edge, so the backend sent it.
++    if (process.env.BJP_WACTO_ASSEMBLY_WHATNEXT === 'backend') return sendWhatNext(phone, mobile, '📍 *Almost done!*');
++    return undefined;
+   }
+   if (DISTRICT_ASSEMBLIES[label]) {
+     await saveSession(mobile, { district: label, assembly: '', voter: null });

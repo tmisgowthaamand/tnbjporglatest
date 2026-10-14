@@ -1,0 +1,171 @@
+/* Admin "media list" — Apple (España) row-list layout. */
+
+.admin-medialist {
+  display: flex;
+  flex-direction: column;
+}
+
+.admin-medialist .ml-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 14px 20px;
+  border-bottom: 1px solid var(--color-canvas);
+  transition: background 0.18s ease;
+  border-radius: 12px;
+}
+.admin-medialist .ml-row:last-child { border-bottom: none; }
+.admin-medialist .ml-row.ml-clickable { cursor: pointer; }
+.admin-medialist .ml-row.ml-clickable:hover { background: var(--color-canvas); }
+
+.admin-medialist .ml-index {
+  width: 28px;
+  text-align: center;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--color-mid-gray);
+  flex-shrink: 0;
+}
+
+.admin-medialist .ml-cover {
+  width: 48px;
+  height: 48px;
+  border-radius: 12px;
+  object-fit: cover;
+  background: var(--color-canvas);
+  border: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-mid-gray);
+  font-size: 18px;
+  flex-shrink: 0;
+  overflow: hidden;
+}
+
+.admin-medialist .ml-info {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  flex: 1;
+}
+
+.admin-medialist .ml-name {
+  font-family: var(--font-sf-pro-text);
+  font-weight: 500;
+  color: var(--color-primary-ink);
+  font-size: 15px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.admin-medialist a.ml-name { text-decoration: none; }
+.admin-medialist a.ml-name:hover { text-decoration: underline; color: #0066cc; }
+
+.admin-medialist .ml-sub {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--color-mid-gray);
+  flex-wrap: wrap;
+}
+.admin-medialist .ml-sub code {
+  font-family: var(--font-ui-monospace);
+  background: var(--color-canvas);
+  border: none;
+  padding: 2px 8px;
+  border-radius: 980px;
+  font-size: 12px;
+  color: var(--color-primary-ink);
+}
+.admin-medialist .ml-sub .ml-code {
+  color: #2e7d32;
+  font-weight: 600;
+}
+.admin-medialist .ml-sub .ml-mob { color: var(--color-mid-gray); }
+
+/* Right-hand meta zone */
+.admin-medialist .ml-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  flex-shrink: 0;
+}
+
+.admin-medialist .ml-date {
+  font-size: 12px;
+  color: var(--color-mid-gray);
+  white-space: nowrap;
+  min-width: 68px;
+  text-align: right;
+}
+
+/* Small pill (booth number, wing, assembly) */
+.admin-medialist .ml-tag {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 980px;
+  white-space: nowrap;
+  background: var(--color-canvas);
+  color: var(--color-primary-ink);
+}
+.admin-medialist .ml-tag.ml-tag-wing {
+  background: #fef3c7;
+  color: var(--color-ember);
+}
+
+/* Referral count pill */
+.admin-medialist .ml-count {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: 13px;
+  font-weight: 600;
+  color: #2e7d32;
+  background: #e6f4ea;
+  padding: 4px 12px;
+  border-radius: 980px;
+  white-space: nowrap;
+}
+
+/* Status badge (pill) */
+.admin-medialist .ml-badge {
+  font-size: 12px;
+  font-weight: 500;
+  padding: 4px 12px;
+  border-radius: 980px;
+  white-space: nowrap;
+  text-transform: capitalize;
+}
+.admin-medialist .ml-badge.b-pending      { background: #fef3c7;  color: var(--color-ember); }
+.admin-medialist .ml-badge.b-confirmed,
+.admin-medialist .ml-badge.b-interested   { background: #e6f4ea;  color: #2e7d32; }
+.admin-medialist .ml-badge.b-rejected,
+.admin-medialist .ml-badge.b-not_interested { background: #fce8e6; color: #c5221f; }
+.admin-medialist .ml-badge.b-neutral      { background: #fef3c7;  color: var(--color-ember); }
+
+/* Action buttons */
+.admin-medialist .ml-actions { display: flex; gap: 6px; }
+.admin-medialist .ml-reviewed {
+  font-size: 12px;
+  color: var(--color-mid-gray);
+  font-style: italic;
+}
+
+/* Rank / crown indicator */
+.admin-medialist .ml-rank {
+  width: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+@media (max-width: 640px) {
+  .admin-medialist .ml-row { padding: 12px 14px; gap: 10px; }
+  .admin-medialist .ml-index { display: none; }
+  .admin-medialist .ml-date { display: none; }
+}

@@ -1,0 +1,29 @@
+{
+  "date": "2026-09-22",
+  "url": "https://www.tnbjp.org",
+  "scope": "unauthenticated-production-safe",
+  "healthScore": 98,
+  "completionStatus": "DONE_WITH_CONCERNS",
+  "issues": [
+    {
+      "id": "ISSUE-001",
+      "title": "Tamil flow shows English validation feedback",
+      "severity": "low",
+      "category": "content-localization"
+    }
+  ],
+  "categoryScores": {
+    "console": 100,
+    "links": 100,
+    "visual": 100,
+    "functional": 100,
+    "ux": 97,
+    "performance": 100,
+    "content": 92,
+    "accessibility": 100
+  },
+  "coverageLimitations": [
+    "authenticated user workflows require a test mobile and OTP",
+    "authenticated admin workflows require valid test credentials"
+  ]
+}

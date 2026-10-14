@@ -1,0 +1,954 @@
+--- live/backend/server.js
++++ deploy/backend/server.js
+@@ -1,9 +1,12 @@
+ const Sentry = require('@sentry/node');
++const { scrubSentryEvent } = require('./services/sentryScrub');
+ 
+ Sentry.init({
+   dsn: 'https://3981855d15d59ffb24e8d77b8fcd97bb@o4512071928184832.ingest.de.sentry.io/4512071953219664',
+   environment: process.env.NODE_ENV || 'production',
+   tracesSampleRate: 0.2,
++  beforeSend: scrubSentryEvent,             // strip the WACTO webhook ?key= secret
++  beforeSendTransaction: scrubSentryEvent,
+ });
+ 
+ require('express-async-errors'); // route async errors auto-forward to the global handler
+@@ -40,6 +43,7 @@
+ const boothPresidentRoutes = require('./routes/boothPresidentRoutes');
+ const whatsappWebhookRoutes = require('./routes/whatsappWebhook');
+ const whatsappFlowRoutes = require('./routes/whatsappFlow');
++const bjpWactoRoutes = require('./routes/bjpWactoRoutes');
+ const flowImagesRoutes = require('./routes/flowImagesRoutes');
+ const { getAssemblyMetadata } = require('./services/jurisdictionService');
+ const { ensureKeysExist } = require('./services/waFlowImages');
+@@ -164,6 +168,7 @@
+ // ── WhatsApp Cloud API automation ──
+ app.use('/api/whatsapp', whatsappWebhookRoutes);   // GET/POST /api/whatsapp/webhook
+ app.use('/api/whatsapp/flow', whatsappFlowRoutes); // encrypted Flow data-exchange endpoint
++app.use('/api/whatsapp/bjp-wacto', bjpWactoRoutes); // BJP WACTO chatbot webhook (POST /events?key=...)
+ 
+ // Health Check (Verifies Application & Database Readiness)
+ app.get('/api/health', async (req, res) => {
+--- live/etc/nginx/sites-enabled/bjptn
++++ deploy/etc/nginx/sites-enabled/bjptn
+@@ -1,3 +1,7 @@
++# BJP WACTO webhook: log without the query string (it carries the ?key= secret)
++log_format bjp_noquery '$remote_addr - $remote_user [$time_local] "$request_method $uri $server_protocol" '
++                       '$status $body_bytes_sent "$http_referer" "$http_user_agent"';
++
+ server {
+     root /var/www/bjptn/dist;
+     client_max_body_size 12M;
+@@ -73,6 +77,19 @@
+         add_header Content-Security-Policy "default-src 'self' https: data: 'unsafe-inline'; img-src 'self' https: data: blob: *.backblazeb2.com *.cloudinary.com res.cloudinary.com; child-src 'self' blob:; frame-src 'self' blob:;" always;
+     }
+ 
++    location = /api/whatsapp/bjp-wacto/events {
++        access_log /var/log/nginx/access.log bjp_noquery;
++        proxy_pass http://127.0.0.1:5000;
++        proxy_http_version 1.1;
++        proxy_set_header Host $host;
++        proxy_set_header X-Real-IP $remote_addr;
++        proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
++        proxy_set_header X-Forwarded-Proto $scheme;
++        proxy_connect_timeout 10s;
++        proxy_send_timeout 30s;
++        proxy_read_timeout 30s;
++    }
++
+     location /api {
+         proxy_pass http://127.0.0.1:5000;
+         proxy_http_version 1.1;
+--- /dev/null
++++ deploy/backend/routes/bjpWactoRoutes.js
+@@ -0,0 +1,11 @@
++const express = require('express');
++const router  = express.Router();
++const { handleEvents } = require('../controllers/bjpWactoController');
++
++// WACTO message webhook — WACTO forwards every incoming WhatsApp message here.
++// Set the WACTO webhook URL to: https://<api-host>/api/whatsapp/bjp-wacto/events?key=<BJP_WACTO_WEBHOOK_KEY>
++// The key is a secret in the URL: Sentry scrubs it (services/sentryScrub.js) and nginx logs
++// this location without the query string (log_format bjp_noquery).
++router.post('/events', handleEvents);
++
++module.exports = router;
+--- /dev/null
++++ deploy/backend/controllers/bjpWactoController.js
+@@ -0,0 +1,406 @@
++/**
++ * BJP WACTO Controller
++ *
++ * WACTO forwards every incoming WhatsApp message (Meta webhook format) to
++ *   POST /api/whatsapp/bjp-wacto/events?key=<BJP_WACTO_WEBHOOK_KEY>
++ * WACTO's own flow nodes send the menus/lists; this handler only answers the
++ * steps WACTO cannot (typed EPIC/name, scheme picks, Done, volunteer, the
++ * returning-user options) and replies through the WACTO API.
++ *
++ * It works from the tapped LABEL text (WACTO never sends node ids).
++ * Uses the WhatsApp phone number as the user identity — no OTP, no JWT.
++ * In-progress registration lives in the WactoSession collection (PM2 cluster).
++ */
++
++const User                  = require('../models/User');
++const SchemeApplication     = require('../models/SchemeApplication');
++const BoothPresidentRequest = require('../models/BoothPresidentRequest');
++const Scheme                = require('../models/Scheme');
++const WactoSession          = require('../models/WactoSession');
++const { findVoterByEpic }   = require('../services/voterSearchService');
++const { sendWactoText }     = require('../services/wactoSender');
++const { DISTRICT_ASSEMBLIES, SCHEME_TITLES } = require('../constants/wactoFlowLabels');
++
++const SESSION_TTL_MS = (WactoSession.SESSION_TTL_SECONDS || 7200) * 1000;
++const SITE = 'https://tnbjp.org';
++
++// ── Labels shown by the WACTO flow (English) ──────────────────────────────────
++const L = {
++  register:      new Set(['Register', 'Register for Schemes', 'Register as Volunteer']),
++  noEpic:        "I don't have EPIC",
++  cont:          'Continue ✅',
++  pickSchemes:   'Pick Schemes',
++  volunteerOnly: 'Volunteer only',
++  both:          'Schemes + Volunteer',
++  done:          '✅ Done Selecting',
++  myRegistration:'My Registration',
++  myReferral:    'My Referral Link',
++  myMembers:     'My Members',
++  beVolunteer:   'Be a Volunteer',
++};
++// Answered by WACTO nodes (or plain chit-chat) — the backend stays quiet.
++const QUIET = /^(hi+|hello+|hey+|start|menu|ok|okay|thanks?|thank you|support|main menu)$/i;
++const NAV   = /^More (Districts|Assemblies|Schemes)/;
++const SCHEME_TITLE_SET = new Set(SCHEME_TITLES);
++
++// Normalize WhatsApp phone → 10-digit mobile (same as waHelpers.js last10)
++const last10 = (phone) => {
++  const d = String(phone || '').replace(/\D/g, '');
++  return d.length > 10 ? d.slice(-10) : d;
++};
++
++// Generate a unique NT- referral code
++async function genReferralCode() {
++  for (let i = 0; i < 10; i++) {
++    const code = 'NT-' + Math.random().toString(36).substring(2, 10).toUpperCase();
++    const exists = await User.exists({ referralCode: code });
++    if (!exists) return code;
++  }
++  throw new Error('Failed to generate unique referral code');
++}
++
++// Find or create a User from WACTO data (no OTP gate)
++async function findOrCreateUser({ mobile, epicNo, voterName, district, assemblyName, boothNo = '0', gender = 'Unspecified', assemblyNo = '' }) {
++  let user = await User.findOne({ mobile });
++  if (user) return { user, isNew: false };
++
++  const referralCode = await genReferralCode();
++  user = await User.create({
++    mobile,
++    epicNo:       epicNo || ('PND-' + mobile),
++    voterName:    voterName || 'Member',
++    district:     district || 'Tamil Nadu',
++    assemblyName: assemblyName || 'Assembly',
++    boothNo,
++    gender,
++    assemblyNo,
++    referralCode,
++    referredBy: null,
++  });
++  return { user, isNew: true };
++}
++
++// Tapped scheme title → active Scheme (exact, case-insensitive, name or alias; no regex)
++async function findSchemeByTitle(title) {
++  const t = String(title || '').trim().toLowerCase();
++  const schemes = await Scheme.find({ active: true }).lean();
++  return schemes.find((s) => String(s.name).toLowerCase() === t
++    || (s.keys || []).some((k) => String(k).toLowerCase() === t)) || null;
++}
++
++// Create a SchemeApplication if one doesn't already exist for this user+scheme
++async function applyForScheme(user, scheme) {
++  const existing = await SchemeApplication.findOne({ userId: user._id, schemeId: scheme.id });
++  if (existing) return { app: existing, alreadyHad: true };
++  const app = await SchemeApplication.create({
++    userId:       user._id,
++    epicNo:       user.epicNo,
++    voterName:    user.voterName,
++    mobile:       user.mobile,
++    district:     user.district,
++    assemblyName: user.assemblyName,
++    assemblyNo:   user.assemblyNo || '',
++    boothNo:      user.boothNo,
++    schemeId:     scheme.id,
++    schemeName:   scheme.name,
++    clusterName:  scheme.cluster || 'BJP Nalam Thittam Welfare',
++    benefit:      scheme.benefit || '',
++    status:       'Submitted',
++    appliedAt:    new Date(),
++  });
++  return { app, alreadyHad: false };
++}
++
++// Create or re-apply a volunteer request. Returns the request (status 'Approved' untouched).
++async function submitVolunteer(user) {
++  let request = await BoothPresidentRequest.findOne({ userId: user._id });
++  if (request && request.status === 'Approved') return request;
++
++  const fields = {
++    type:         'volunteer',
++    voterName:    user.voterName,
++    epicNo:       user.epicNo,
++    mobile:       user.mobile,
++    gender:       user.gender || 'Unspecified',
++    district:     user.district,
++    assemblyName: user.assemblyName,
++    assemblyNo:   user.assemblyNo || '',
++    boothNo:      '',
++    status:       'Pending',
++    rejectionReason: '',
++    appliedAt:    new Date(),
++    actionDate:   null,
++    actionBy:     '',
++  };
++  if (request) {
++    Object.assign(request, fields);
++    await request.save();
++    return request;
++  }
++  return BoothPresidentRequest.create({ userId: user._id, isCustomBooth: false, ...fields });
++}
++
++// ── Session helpers ───────────────────────────────────────────────────────────
++
++async function loadSession(mobile) {
++  const s = await WactoSession.findOne({ phone: mobile }).lean();
++  if (!s) return null;
++  if (s.updatedAt && Date.now() - new Date(s.updatedAt).getTime() > SESSION_TTL_MS) return null;
++  return s;
++}
++
++async function saveSession(mobile, fields) {
++  await WactoSession.updateOne(
++    { phone: mobile },
++    { $set: { ...fields, updatedAt: new Date() } },
++    { upsert: true },
++  );
++}
++
++const clearSession = (mobile) => WactoSession.deleteOne({ phone: mobile });
++
++// Where the user said they live: voter roll (EPIC) wins, else tapped district + assembly.
++function locationOf(s) {
++  if (!s) return null;
++  if (s.voter) return s.voter;
++  if (s.district && s.assembly) {
++    return { district: s.district, assemblyName: s.assembly, assemblyNo: '', boothNo: '0', gender: 'Unspecified', epicNo: '' };
++  }
++  return null;
++}
++
++async function userFromSession(mobile, s, profileName) {
++  const loc = locationOf(s);
++  return findOrCreateUser({
++    mobile,
++    epicNo:       loc.epicNo,
++    voterName:    (s.voter && s.voter.voterName) || s.name || profileName || 'Member',
++    district:     loc.district,
++    assemblyName: loc.assemblyName,
++    boothNo:      loc.boothNo || '0',
++    gender:       loc.gender || 'Unspecified',
++    assemblyNo:   loc.assemblyNo || '',
++  });
++}
++
++const START_AGAIN = '⚠️ Your registration details have expired.\n\nTap *Register* in the menu to start again.';
++const NOT_REGISTERED = "You're not registered yet.\n\nTap *Register* in the menu — it takes about a minute.";
++
++function volunteerStatusLine(request) {
++  if (!request) return '';
++  if (request.status === 'Approved') return '🏆 *You are an approved volunteer!*';
++  if (request.status === 'Rejected') {
++    return `❌ *Volunteer application declined*${request.rejectionReason ? `\nReason: ${request.rejectionReason}` : ''}\n\nTap *Support* in the menu if you would like to re-apply.`;
++  }
++  return '⏳ *Volunteer application pending* — under review by the Super Admin.';
++}
++
++// ── Typed text ────────────────────────────────────────────────────────────────
++
++async function handleText(phone, mobile, text, session) {
++  if (QUIET.test(text)) return;
++  if (!session || !session.awaiting) return;
++
++  if (session.awaiting === 'epic') {
++    const epic = text.toUpperCase().replace(/[\s-]/g, '');
++    if (!/^[A-Z0-9/]{6,20}$/.test(epic)) {
++      await sendWactoText(phone, '❌ That doesn\'t look like an EPIC number.\n\nType it as printed on your voter card — e.g. *TNA1234567* — or tap *I don\'t have EPIC*.');
++      return;
++    }
++    const result = await findVoterByEpic(epic);
++    if (!result || !result.doc) {
++      await sendWactoText(phone, `❌ EPIC *${epic}* was not found in the Tamil Nadu voter roll.\n\nCheck it and type it again, or tap *I don't have EPIC*.`);
++      return;
++    }
++    const d = result.doc;
++    const voter = {
++      epicNo:       d.EPIC_NO || epic,
++      voterName:    d.VOTER_NAME || '',
++      district:     d.DISTRICT || '',
++      assemblyNo:   String(d.ASSEMBLY_NO || (result.colName || '').replace('ass_', '')),
++      assemblyName: d.ASSEMBLY_NAME || `Assembly ${d.ASSEMBLY_NO}`,
++      boothNo:      String(d.PART_NO || '0'),
++      gender:       d.GENDER || 'Unspecified',
++    };
++    await saveSession(mobile, { voter });
++    // Privacy: anyone can type any EPIC, so never echo voter-roll details back.
++    await sendWactoText(phone, '✅ Voter ID found');
++    return;
++  }
++
++  if (session.awaiting === 'name') {
++    const name = text.replace(/\s+/g, ' ').trim();
++    if (name.length < 2 || name.length > 60 || !/\p{L}/u.test(name)) {
++      await sendWactoText(phone, '❌ Please type your full name — e.g. *Vijay Kumar*.');
++      return;
++    }
++    await saveSession(mobile, { name });
++    await sendWactoText(phone, `👍 Thanks, *${name}*.\n\nTap *Continue ✅* to choose your district.`);
++  }
++}
++
++// ── Taps (list rows / reply buttons) ──────────────────────────────────────────
++
++async function handleTap(phone, mobile, label, session, profileName) {
++  if (QUIET.test(label) || NAV.test(label)) return;
++
++  if (label === L.myRegistration) {
++    const user = await User.findOne({ mobile }).lean();
++    if (!user) return sendWactoText(phone, NOT_REGISTERED);
++    const apps = await SchemeApplication.find({ userId: user._id }).select('schemeName status appliedAt').sort({ appliedAt: -1 }).lean();
++    const request = await BoothPresidentRequest.findOne({ userId: user._id }).lean();
++    const lines = apps.map((a, i) => `${i + 1}. ${a.schemeName} — ${a.status}`).join('\n') || 'No schemes yet.';
++    const epic = String(user.epicNo || '').startsWith('PND-') ? 'Not provided' : user.epicNo;
++    return sendWactoText(phone, `👤 *My Registration*\n\nName: *${user.voterName}*\nAssembly: *${user.assemblyName}*\nDistrict: *${user.district}*\nEPIC: *${epic}*\n\n📋 *Schemes*\n${lines}${request ? `\n\n${volunteerStatusLine(request)}` : ''}\n\n📱 ${SITE}`);
++  }
++
++  if (label === L.myReferral) {
++    const user = await User.findOne({ mobile }).lean();
++    if (!user) return sendWactoText(phone, NOT_REGISTERED);
++    const count = await User.countDocuments({ referredBy: user.referralCode });
++    return sendWactoText(phone, `🔗 *My Referral Link*\n\nShare this link to invite members:\n${SITE}/?ref=${user.referralCode}\n\nYour code: *${user.referralCode}*\nMembers referred: *${count}*`);
++  }
++
++  if (label === L.myMembers) {
++    const user = await User.findOne({ mobile }).lean();
++    if (!user) return sendWactoText(phone, NOT_REGISTERED);
++    const total = await User.countDocuments({ referredBy: user.referralCode });
++    if (!total) return sendWactoText(phone, '👥 *My Members*\n\nNo members referred yet.\n\nTap *My Referral Link* to get your invite link.');
++    const recent = await User.find({ referredBy: user.referralCode }).select('voterName district createdAt').sort({ createdAt: -1 }).limit(5).lean();
++    const lines = recent.map((m, i) => `${i + 1}. ${m.voterName} — ${m.district}`).join('\n');
++    return sendWactoText(phone, `👥 *My Members* — ${total} total\n\nLatest:\n${lines}`);
++  }
++
++  if (label === L.beVolunteer) {
++    const user = await User.findOne({ mobile });
++    if (!user) return sendWactoText(phone, "🤝 To volunteer, register first.\n\nTap *Register* in the menu, then choose *Volunteer only* (or *Schemes + Volunteer*).");
++    const existing = await BoothPresidentRequest.findOne({ userId: user._id }).lean();
++    if (existing) return sendWactoText(phone, volunteerStatusLine(existing));
++    await submitVolunteer(user);
++    return sendWactoText(phone, `✅ *Volunteer application submitted!*\n\nAssembly: *${user.assemblyName}*\n\nThe Super Admin will review it. Tap *Be a Volunteer* any time to see the status.`);
++  }
++
++  if (L.register.has(label)) {
++    // Fresh start; WACTO sends the EPIC question.
++    await clearSession(mobile);
++    await saveSession(mobile, { awaiting: 'epic', voter: null, name: '', district: '', assembly: '', schemes: [], volunteer: false });
++    return;
++  }
++
++  if (label === L.noEpic) {
++    await saveSession(mobile, { awaiting: 'name', voter: null });
++    return;
++  }
++
++  if (label === L.cont) {
++    if (session && session.awaiting === 'epic' && !session.voter) {
++      return sendWactoText(phone, "⚠️ We haven't received a valid EPIC yet.\n\nType your EPIC number, or tap *I don't have EPIC*.");
++    }
++    if (session && session.awaiting === 'name' && !session.name) {
++      return sendWactoText(phone, '⚠️ Please type your full name first, then tap *Continue ✅*.');
++    }
++    if (session) await saveSession(mobile, { awaiting: null });
++    return;
++  }
++
++  if (label === L.pickSchemes || label === L.both) {
++    if (!locationOf(session)) return sendWactoText(phone, START_AGAIN);
++    await saveSession(mobile, { volunteer: label === L.both, awaiting: null });
++    return; // WACTO sends the scheme list
++  }
++
++  if (label === L.volunteerOnly) {
++    if (!locationOf(session)) return sendWactoText(phone, START_AGAIN);
++    const { user } = await userFromSession(mobile, session, profileName);
++    const request = await submitVolunteer(user);
++    await clearSession(mobile);
++    if (request.status === 'Approved') return sendWactoText(phone, volunteerStatusLine(request));
++    return sendWactoText(phone, `✅ *Volunteer application submitted!*\n\nThe Super Admin will review it. Tap *Be a Volunteer* in the menu any time to see the status.\n\n🔗 Invite others: ${SITE}/?ref=${user.referralCode}`);
++  }
++
++  if (label === L.done) {
++    if (!locationOf(session)) return sendWactoText(phone, START_AGAIN);
++    const picked = session.schemes || [];
++    if (!picked.length) return sendWactoText(phone, '⚠️ Please pick at least one scheme from the list, then tap *✅ Done Selecting*.');
++
++    const { user } = await userFromSession(mobile, session, profileName);
++    const added = [], already = [];
++    for (const title of picked) {
++      const scheme = await findSchemeByTitle(title);
++      if (!scheme) continue;
++      const { alreadyHad } = await applyForScheme(user, scheme);
++      (alreadyHad ? already : added).push(scheme.name);
++    }
++    const request = session.volunteer ? await submitVolunteer(user) : null;
++    await clearSession(mobile);
++
++    const parts = ['✅ *Registration Complete!*\n\n🎉 Welcome to BJP Nalam Thittam!'];
++    if (added.length) parts.push(`You're now registered for:\n${added.map((n) => `• ${n}`).join('\n')}`);
++    if (already.length) parts.push(`You had already applied for:\n${already.map((n) => `• ${n}`).join('\n')}`);
++    if (request) parts.push(request.status === 'Approved' ? volunteerStatusLine(request) : '🤝 *Volunteer application submitted* — under review by the Super Admin.');
++    parts.push(`📱 Login: ${SITE}\n🔗 Invite others: ${SITE}/?ref=${user.referralCode}`);
++    return sendWactoText(phone, parts.join('\n\n'));
++  }
++
++  if (SCHEME_TITLE_SET.has(label)) {
++    const scheme = await findSchemeByTitle(label);
++    if (!scheme) return sendWactoText(phone, `⚠️ *${label}* can't be applied for on WhatsApp yet. Please pick another scheme.`);
++    const picked = (session && session.schemes) || [];
++    if (picked.includes(label)) return sendWactoText(phone, `*${scheme.name}* is already in your list.`);
++    const next = [...picked, label];
++    await saveSession(mobile, { schemes: next });
++    return sendWactoText(phone, `✅ *${scheme.name}* added — ${next.length} picked so far.\n\nOpen the list again to add more, or tap *✅ Done Selecting*.`);
++  }
++
++  // Assembly of the chosen district (checked first: e.g. "Dindigul" is both), else a district.
++  if (session && session.district && (DISTRICT_ASSEMBLIES[session.district] || []).includes(label)) {
++    await saveSession(mobile, { assembly: label, voter: null });
++    return; // WACTO sends "What next?"
++  }
++  if (DISTRICT_ASSEMBLIES[label]) {
++    await saveSession(mobile, { district: label, assembly: '', voter: null });
++  }
++}
++
++// ─────────────────────────────────────────────────────────────────────────────
++// POST /api/whatsapp/bjp-wacto/events?key=...
++// ─────────────────────────────────────────────────────────────────────────────
++let warnedNoKey = false;
++const handleEvents = async (req, res) => {
++  const key = process.env.BJP_WACTO_WEBHOOK_KEY;
++  if (!key) {
++    if (!warnedNoKey) { console.error('[BJP WACTO] BJP_WACTO_WEBHOOK_KEY not set — ignoring all events'); warnedNoKey = true; }
++    return res.sendStatus(503);
++  }
++  if (!req.query || req.query.key !== key) return res.sendStatus(403);
++  res.sendStatus(200); // ack immediately so WACTO doesn't retry
++
++  try {
++    const value = req.body?.entry?.[0]?.changes?.[0]?.value;
++    const msg = value?.messages?.[0];
++    if (!msg || !msg.from) return;
++
++    const phone = msg.from;
++    const mobile = last10(phone);
++    // Live-test switch: when set, answer only these 10-digit numbers (comma-separated).
++    const allow = String(process.env.BJP_WACTO_ALLOWLIST || '').split(',').map((s) => last10(s)).filter(Boolean);
++    if (allow.length && !allow.includes(mobile)) return;
++    const profileName = value.contacts?.[0]?.profile?.name || '';
++    const session = await loadSession(mobile);
++
++    if (msg.type === 'text') {
++      const text = String(msg.text?.body || '').trim();
++      if (text) await handleText(phone, mobile, text, session);
++      return;
++    }
++    if (msg.type === 'interactive') {
++      const it = msg.interactive || {};
++      const label = String(it.list_reply?.title || it.button_reply?.title || '').trim();
++      if (label) await handleTap(phone, mobile, label, session, profileName);
++    }
++  } catch (err) {
++    console.error('[BJP WACTO] event error:', err.message);
++  }
++};
++
++module.exports = { handleEvents };
+--- /dev/null
++++ deploy/backend/services/wactoSender.js
+@@ -0,0 +1,52 @@
++/**
++ * WACTO BSP — outbound WhatsApp messages for the BJP Nalam Thittam chatbot.
++ * Same REST API as the EDMS sender (EDM/backend/src/services/wactoService.js).
++ *
++ * Env vars required:
++ *   WACTO_API_KEY   — bearer token
++ *   WACTO_CHANNEL   — the BJP WhatsApp number used as channel (e.g. 9198xxxxxxxx)
++ *   WACTO_BASE_URL  — defaults to https://backend.wacto.ai/api/v1.0
++ */
++const axios = require('axios');
++
++const BASE_URL = process.env.WACTO_BASE_URL || 'https://backend.wacto.ai/api/v1.0';
++const TIMEOUT_MS = 15000;
++
++const getKey = () => process.env.WACTO_API_KEY || '';
++const getChannel = () => process.env.WACTO_CHANNEL || '';
++
++function wactoConfigured() {
++  return !!(getKey() && getChannel());
++}
++
++function toWaPhone(mobile) {
++  const d = String(mobile).replace(/\D/g, '');
++  return d.length === 10 ? `91${d}` : d;
++}
++
++async function post(path, body) {
++  const key = getKey();
++  const channel = getChannel();
++  if (!key || !channel) throw new Error('WACTO not configured (WACTO_API_KEY / WACTO_CHANNEL missing)');
++  try {
++    const res = await axios.post(`${BASE_URL}${path}/${channel}`, body, {
++      headers: { Authorization: `Bearer ${key}`, 'Content-Type': 'application/json' },
++      timeout: TIMEOUT_MS,
++    });
++    return res.data;
++  } catch (err) {
++    const msg = err.response?.data?.message || err.response?.data?.error || err.message;
++    throw new Error(`WACTO API error: ${msg}`);
++  }
++}
++
++// Free-form text (only inside the 24-hour user-initiated window).
++async function sendWactoText(mobile, text) {
++  return post('/messages/send-text', { to: toWaPhone(mobile), type: 'text', text: { body: text } });
++}
++
++async function sendWactoImageWithCaption(mobile, imageUrl, caption) {
++  return post('/messages/send-image', { to: toWaPhone(mobile), image: { link: imageUrl, caption } });
++}
++
++module.exports = { wactoConfigured, sendWactoText, sendWactoImageWithCaption };
+--- /dev/null
++++ deploy/backend/services/sentryScrub.js
+@@ -0,0 +1,29 @@
++/**
++ * Sentry beforeSend / beforeSendTransaction hook: removes the BJP WACTO webhook
++ * secret (`?key=...`) from every string in an event — request URL, query string,
++ * span attributes, breadcrumbs — before it leaves the server.
++ */
++const KEY_RE = /([?&]key=)[^&#\s"']+/gi;
++
++function scrub(value, depth = 0) {
++  if (depth > 12 || value == null) return value;
++  if (typeof value === 'string') return value.replace(KEY_RE, '$1[Filtered]');
++  if (Array.isArray(value)) return value.map((v) => scrub(v, depth + 1));
++  if (typeof value === 'object') {
++    for (const k of Object.keys(value)) {
++      // Query strings can arrive without a leading ? (e.g. request.query_string "key=abc").
++      if (k === 'query_string' && typeof value[k] === 'string') {
++        value[k] = value[k].replace(/(^|&)key=[^&]*/gi, '$1key=[Filtered]');
++      } else if (k === 'url.query' || k === 'http.query') {
++        value[k] = String(value[k]).replace(/(^|[?&])key=[^&]*/gi, '$1key=[Filtered]');
++      } else {
++        value[k] = scrub(value[k], depth + 1);
++      }
++    }
++  }
++  return value;
++}
++
++const scrubSentryEvent = (event) => scrub(event);
++
++module.exports = { scrubSentryEvent };
+--- /dev/null
++++ deploy/backend/models/WactoSession.js
+@@ -0,0 +1,23 @@
++const mongoose = require('mongoose');
++
++// In-progress WhatsApp (WACTO) registration for one phone. Stored in Mongo, not
++// memory, because bjptn-backend runs as a PM2 cluster — each tap can hit a
++// different worker. Rows expire 2 hours after the last tap.
++const SESSION_TTL_SECONDS = 2 * 60 * 60;
++
++const wactoSessionSchema = new mongoose.Schema({
++  phone: { type: String, required: true, unique: true },   // 10-digit mobile
++  awaiting: { type: String, enum: ['epic', 'name', null], default: null },
++  voter: { type: mongoose.Schema.Types.Mixed, default: null }, // from the voter roll after a typed EPIC
++  name: { type: String, default: '' },                       // typed name (no-EPIC path)
++  district: { type: String, default: '' },
++  assembly: { type: String, default: '' },
++  schemes: { type: [String], default: [] },                  // Scheme.name values picked so far
++  volunteer: { type: Boolean, default: false },              // "Schemes + Volunteer" chosen
++  updatedAt: { type: Date, default: Date.now },
++});
++
++wactoSessionSchema.index({ updatedAt: 1 }, { expireAfterSeconds: SESSION_TTL_SECONDS });
++
++module.exports = mongoose.model('WactoSession', wactoSessionSchema);
++module.exports.SESSION_TTL_SECONDS = SESSION_TTL_SECONDS;
+--- /dev/null
++++ deploy/backend/constants/wactoFlowLabels.js
+@@ -0,0 +1,354 @@
++/**
++ * Labels the BJP WACTO chatbot shows as list rows. Generated from the WACTO export
++ * "exported_chatbot (25).json" — the backend recognises taps by these exact titles,
++ * so regenerate this file whenever district/assembly/scheme rows change in the flow.
++ */
++const DISTRICT_ASSEMBLIES = {
++  "Ariyalur": [
++    "Ariyalur",
++    "Jayankondam"
++  ],
++  "Chengalpattu": [
++    "Shozhinganallur",
++    "Pallavaram",
++    "Tambaram",
++    "Chengalpattu",
++    "Thiruporur",
++    "Cheyyur",
++    "Madurantakam"
++  ],
++  "Chennai": [
++    "Dr.Radhakrishnan Nagar",
++    "Perambur",
++    "Kolathur",
++    "Villivakkam",
++    "Thiru-Vi-Ka-Nagar",
++    "Egmore",
++    "Royapuram",
++    "Harbour",
++    "Chepauk-Thiruvallikeni",
++    "Thousand Lights",
++    "Anna Nagar",
++    "Virugampakkam",
++    "Saidapet",
++    "Thiyagarayanagar",
++    "Mylapore",
++    "Velachery"
++  ],
++  "Coimbatore": [
++    "Mettuppalayam",
++    "Sulur",
++    "Kavundampalayam",
++    "Coimbatore North",
++    "Thondamuthur",
++    "Coimbatore South",
++    "Singanallur",
++    "Kinathukadavu",
++    "Pollachi",
++    "Valparai"
++  ],
++  "Cuddalore": [
++    "Tittakudi",
++    "Vriddhachalam",
++    "Neyveli",
++    "Panruti",
++    "Cuddalore",
++    "Kurinjipadi",
++    "Bhuvanagiri",
++    "Chidambaram",
++    "Kattumannarkoil"
++  ],
++  "Dharmapuri": [
++    "Palacodu",
++    "Pennagaram",
++    "Dharmapuri",
++    "Pappireddipatti",
++    "Harur"
++  ],
++  "Dindigul": [
++    "Palani",
++    "Oddanchatram",
++    "Athoor",
++    "Nilakkottai",
++    "Natham",
++    "Dindigul",
++    "Vedasandur"
++  ],
++  "Erode": [
++    "Erode East",
++    "Erode West",
++    "Modakkurichi",
++    "Perundurai",
++    "Bhavani",
++    "Anthiyur",
++    "Gobichettipalayam",
++    "Bhavanisagar"
++  ],
++  "Kallakurichi": [
++    "Ulundurpettai",
++    "Rishivandiyam",
++    "Sankarapuram",
++    "Kallakurichi"
++  ],
++  "Kanchipuram": [
++    "Alandur",
++    "Sriperumbudur",
++    "Uthiramerur",
++    "Kancheepuram"
++  ],
++  "Kanyakumari": [
++    "Kanniyakumari",
++    "Nagercoil",
++    "Colachal",
++    "Padmanabhapuram",
++    "Vilavancode",
++    "Killiyoor"
++  ],
++  "Karur": [
++    "Aravakurichi",
++    "Karur",
++    "Krishnarayapuram",
++    "Kulithalai"
++  ],
++  "Krishnagiri": [
++    "Uthangarai",
++    "Bargur",
++    "Krishnagiri",
++    "Veppanahalli",
++    "Hosur",
++    "Thalli"
++  ],
++  "Madurai": [
++    "Melur",
++    "Madurai East",
++    "Sholavandan",
++    "Madurai North",
++    "Madurai South",
++    "Madurai Central",
++    "Madurai West",
++    "Thiruparankundram",
++    "Thirumangalam",
++    "Usilampatti"
++  ],
++  "Mayiladuthurai": [
++    "Sirkazhi",
++    "Mayiladuthurai",
++    "Poompuhar"
++  ],
++  "Nagapattinam": [
++    "Nagapattinam",
++    "Kilvelur",
++    "Vedaranyam"
++  ],
++  "Namakkal": [
++    "Rasipuram",
++    "Senthamangalam",
++    "Namakkal",
++    "Paramathi-Velur",
++    "Tiruchengodu",
++    "Kumarapalayam"
++  ],
++  "Nilgiris": [
++    "Udhagamandalam",
++    "Gudalur",
++    "Coonoor"
++  ],
++  "Perambalur": [
++    "Perambalur",
++    "Kunnam"
++  ],
++  "Pudukkottai": [
++    "Gandarvakkottai",
++    "Viralimalai",
++    "Pudukkottai",
++    "Thirumayam",
++    "Alangudi",
++    "Aranthangi"
++  ],
++  "Ramanathapuram": [
++    "Paramakudi",
++    "Tiruvadanai",
++    "Ramanathapuram",
++    "Mudhukulathur"
++  ],
++  "Ranipet": [
++    "Arakkonam",
++    "Sholinghur",
++    "Ranipet",
++    "Arcot"
++  ],
++  "Salem": [
++    "Gangavalli",
++    "Attur",
++    "Yercaud",
++    "Omalur",
++    "Mettur",
++    "Edappadi",
++    "Sankari",
++    "Salem West",
++    "Salem North",
++    "Salem South",
++    "Veerapandi"
++  ],
++  "Sivaganga": [
++    "Karaikudi",
++    "Tiruppattur",
++    "Sivaganga",
++    "Manamadurai"
++  ],
++  "Tenkasi": [
++    "Sankarankovil",
++    "Vasudevanallur",
++    "Kadayanallur",
++    "Tenkasi",
++    "Alangulam"
++  ],
++  "Thanjavur": [
++    "Thiruvidaimarudur",
++    "Kumbakonam",
++    "Papanasam",
++    "Thiruvaiyaru",
++    "Thanjavur",
++    "Orathanadu",
++    "Pattukkottai",
++    "Peravurani"
++  ],
++  "Theni": [
++    "Andipatti",
++    "Periyakulam",
++    "Bodinayakanur",
++    "Cumbum"
++  ],
++  "Thoothukudi": [
++    "Vilathikulam",
++    "Thoothukkudi",
++    "Tiruchendur",
++    "Srivaikuntam",
++    "Ottapidaram",
++    "Kovilpatti"
++  ],
++  "Tiruchirappalli": [
++    "Manapparai",
++    "Srirangam",
++    "Tiruchirappalli West",
++    "Tiruchirappalli East",
++    "Thiruverumbur",
++    "Lalgudi",
++    "Manachanallur",
++    "Musiri",
++    "Thuraiyur"
++  ],
++  "Tirunelveli": [
++    "Tirunelveli",
++    "Ambasamudram",
++    "Palayamkottai",
++    "Nanguneri",
++    "Radhapuram"
++  ],
++  "Tirupathur": [
++    "Vaniyambadi",
++    "Ambur",
++    "Jolarpet",
++    "Tirupattur"
++  ],
++  "Tiruppur": [
++    "Dharapuram",
++    "Kangayam",
++    "Avanashi",
++    "Tiruppur North",
++    "Tiruppur South",
++    "Palladam",
++    "Udumalaipettai",
++    "Madathukulam"
++  ],
++  "Tiruvallur": [
++    "Gummidipoondi",
++    "Ponneri",
++    "Tiruttani",
++    "Thiruvallur",
++    "Poonamallee",
++    "Avadi",
++    "Maduravoyal",
++    "Ambattur",
++    "Madavaram",
++    "Thiruvottiyur"
++  ],
++  "Tiruvannamalai": [
++    "Chengam",
++    "Tiruvannamalai",
++    "Kilpennathur",
++    "Kalasapakkam",
++    "Polur",
++    "Arani",
++    "Cheyyar",
++    "Vandavasi"
++  ],
++  "Tiruvarur": [
++    "Thiruthuraipoondi",
++    "Mannargudi",
++    "Thiruvarur",
++    "Nannilam"
++  ],
++  "Vellore": [
++    "Katpadi",
++    "Vellore",
++    "Anaikattu",
++    "Kilvaithinankuppam",
++    "Gudiyattam"
++  ],
++  "Viluppuram": [
++    "Gingee",
++    "Mailam",
++    "Tindivanam",
++    "Vanur",
++    "Viluppuram",
++    "Vikravandi",
++    "Tirukkoyilur"
++  ],
++  "Virudhunagar": [
++    "Rajapalayam",
++    "Srivilliputhur",
++    "Sattur",
++    "Sivakasi",
++    "Virudhunagar",
++    "Aruppukkottai",
++    "Tiruchuli"
++  ]
++};
++
++const SCHEME_TITLES = [
++  "e-Shram",
++  "ABHA",
++  "Udyam",
++  "PMSBY",
++  "PMJJBY",
++  "Jan Dhan",
++  "PM-POSHAN Tracker",
++  "Ayushman Bharat",
++  "Ayushman 70+",
++  "PM Kisan",
++  "PM Matru Vandana",
++  "APY",
++  "NAPS",
++  "PMKVY",
++  "PM Kisan Maan Dhan",
++  "NSP Scholarship",
++  "PM-YASASVI",
++  "NMMS",
++  "KCC",
++  "DAY-NRLM",
++  "Sukanya Samriddhi",
++  "PM Ujjwala",
++  "PM SVANidhi",
++  "PM Surya Ghar",
++  "PM-KUSUM",
++  "PMMSY",
++  "PM-FME",
++  "PM Mudra",
++  "PM Awas Yojana",
++  "Stand Up India",
++  "PM Fasal Bima",
++  "PMEGP"
++];
++
++module.exports = { DISTRICT_ASSEMBLIES, SCHEME_TITLES };

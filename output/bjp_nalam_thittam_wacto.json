@@ -1,0 +1,4542 @@
+{
+  "chatbot": {
+    "name": "BJP Nalam Thittam"
+  },
+  "nodes": [
+    {
+      "nodeId": "root",
+      "type": "interactive",
+      "name": "Root Node",
+      "interactiveId": null,
+      "data": {
+        "body": "🪷 *வணக்கம்! Welcome to BJP Nalam Thittam*\n\nConnect with Central Government welfare schemes.\n\nHow can we help you today?",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "70dc2233-bb17-46df-b301-e015394f7209",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "🪷 BJP Nalam Thittam",
+              "rows": [
+                {
+                  "id": "9d77f021-15d0-4d47-a97c-8a6e934aba06",
+                  "title": "Register for Schemes",
+                  "description": "Apply for Central Govt welfare schemes"
+                },
+                {
+                  "id": "a1d8bf80-f042-4e00-8962-7cc18c4344f7",
+                  "title": "Register as Volunteer",
+                  "description": "Apply to volunteer for BJP TN"
+                },
+                {
+                  "id": "1ca7d4bb-5b46-49e9-b998-01342dcf9813",
+                  "title": "My Registration",
+                  "description": "View your registration & schemes"
+                },
+                {
+                  "id": "43ded55d-eb62-4d27-a798-d08360adddec",
+                  "title": "My Referral Link",
+                  "description": "Share and invite members"
+                },
+                {
+                  "id": "c35e19fc-16d2-4d91-848c-a05a94168eed",
+                  "title": "My Members",
+                  "description": "Members you referred"
+                },
+                {
+                  "id": "2465cf65-5e08-48b2-bc1e-b1e3777170e7",
+                  "title": "Be a Volunteer",
+                  "description": "Volunteer application status"
+                },
+                {
+                  "id": "95853ad2-2eef-483e-9ef7-bf198df4530a",
+                  "title": "Support",
+                  "description": "Get help from our team"
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [
+        "Hi",
+        "Hello",
+        "Hey",
+        "Start",
+        "Menu",
+        "hi",
+        "hello",
+        "hey",
+        "start",
+        "menu"
+      ],
+      "parentNodeId": null,
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": -240,
+        "y": -200
+      }
+    },
+    {
+      "nodeId": "dbb112d9-9690-443c-bdfa-3b2156f7ff6b",
+      "type": "interactive",
+      "name": "Register: EPIC Ask (Schemes)",
+      "interactiveId": "9d77f021-15d0-4d47-a97c-8a6e934aba06",
+      "data": {
+        "body": "📋 *Register for Schemes*\n\nEnter your *EPIC (Voter ID)* number to get started.\n\nYour EPIC is on your voter card — e.g. *TNA1234567*\n\n👇 If you don't have your voter ID, tap below.",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "29bcfb6a-4581-4f0a-b7ea-bb6b0eb949ae",
+                "title": "I don't have EPIC"
+              }
+            }
+          ],
+          "sections": [],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "button"
+      },
+      "keywords": [],
+      "parentNodeId": "root",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 520,
+        "y": -200
+      }
+    },
+    {
+      "nodeId": "042035cd-d9fc-42c7-9e8c-240fac1bb097",
+      "type": "interactive",
+      "name": "Register: EPIC Ask (Volunteer)",
+      "interactiveId": "a1d8bf80-f042-4e00-8962-7cc18c4344f7",
+      "data": {
+        "body": "🤝 *Register as Volunteer*\n\nEnter your *EPIC (Voter ID)* number to continue.\n\nYour EPIC is on your voter card — e.g. *TNA1234567*\n\n👇 If you don't have your voter ID, tap below.",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "0cf09fbe-840f-4589-b85a-eb5e7809d38b",
+                "title": "I don't have EPIC"
+              }
+            }
+          ],
+          "sections": [],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "button"
+      },
+      "keywords": [],
+      "parentNodeId": "root",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 520,
+        "y": 200
+      }
+    },
+    {
+      "nodeId": "57fed9fb-1e89-4fd4-aea0-ce5d5928975b",
+      "type": "interactive",
+      "name": "Support",
+      "interactiveId": "95853ad2-2eef-483e-9ef7-bf198df4530a",
+      "data": {
+        "body": "✅ *Support Request Received!*\n\nOur team will respond within *2 hours*.\n\nFor urgent help:\n📞 *+91 94444 XXXXX*\n⏰ 8am – 10pm daily\n\nThank you! 🙏",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "4ff1dec6-aa75-4981-b802-6e3d3d43a19a",
+                "title": "Main Menu"
+              }
+            }
+          ],
+          "sections": [],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "button"
+      },
+      "keywords": [],
+      "parentNodeId": "root",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 520,
+        "y": 600
+      }
+    },
+    {
+      "nodeId": "39630c03-cce9-47e1-8971-4130b3eda597",
+      "type": "interactive",
+      "name": "Ask: Full Name (No EPIC)",
+      "interactiveId": "29bcfb6a-4581-4f0a-b7ea-bb6b0eb949ae",
+      "data": {
+        "body": "📝 *Please Enter Your Full Name*\n\nType your full name in the message box below and send it.\n\n_Example: Vijay Kumar_\n\nOnce sent, tap *Continue* to select your district.",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "d4c1e0e3-b007-4115-ad2a-6dac9ca3f219",
+                "title": "Continue ✅"
+              }
+            }
+          ],
+          "sections": [],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "button"
+      },
+      "keywords": [],
+      "parentNodeId": "dbb112d9-9690-443c-bdfa-3b2156f7ff6b",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 1040,
+        "y": 200
+      }
+    },
+    {
+      "nodeId": "0908b434-4b62-4e10-857a-06ca534d7b8c",
+      "type": "interactive",
+      "name": "Select District — Page 1/5",
+      "interactiveId": "d4c1e0e3-b007-4115-ad2a-6dac9ca3f219",
+      "data": {
+        "body": "📍 *Select Your District* (Page 1 of 5)\n\nChoose your district from the list below:",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "f63c9ac6-daf5-4fb5-99b6-6b176e4df3d5",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Districts A–K",
+              "rows": [
+                {
+                  "id": "9b73a75a-130a-4ff7-89c0-1bd6176f40de",
+                  "title": "Ariyalur",
+                  "description": ""
+                },
+                {
+                  "id": "06db8636-68d3-4e22-96c5-22d73655d8d8",
+                  "title": "Chengalpattu",
+                  "description": ""
+                },
+                {
+                  "id": "a29c677c-f14c-4ac8-9b34-cf6033fd61e2",
+                  "title": "Chennai",
+                  "description": ""
+                },
+                {
+                  "id": "b774f858-945b-4a6f-83de-c2bcd5fa284c",
+                  "title": "Coimbatore",
+                  "description": ""
+                },
+                {
+                  "id": "5818c1f0-d33c-45ae-b115-60ce83ef5fbb",
+                  "title": "Cuddalore",
+                  "description": ""
+                },
+                {
+                  "id": "475be4d4-839f-4f73-97a4-85f688b0addc",
+                  "title": "Dharmapuri",
+                  "description": ""
+                },
+                {
+                  "id": "bb68f4aa-9ffb-4159-a5eb-1fafd9045462",
+                  "title": "Dindigul",
+                  "description": ""
+                },
+                {
+                  "id": "da583406-b849-44fb-a51a-6a1764a825e0",
+                  "title": "Erode",
+                  "description": ""
+                },
+                {
+                  "id": "5cf88aba-8aab-47c7-b114-6bc09d04b26f",
+                  "title": "Kallakurichi",
+                  "description": ""
+                },
+                {
+                  "id": "a244c3c1-eaae-4f03-9ae4-a56b3dbcae90",
+                  "title": "More Districts →",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "39630c03-cce9-47e1-8971-4130b3eda597",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 1040,
+        "y": -200
+      }
+    },
+    {
+      "nodeId": "50703e94-95c6-452a-b527-494541572cd0",
+      "type": "interactive",
+      "name": "Select District — Page 2/5",
+      "interactiveId": "a244c3c1-eaae-4f03-9ae4-a56b3dbcae90",
+      "data": {
+        "body": "📍 *Select Your District* (Page 2 of 5)",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "7ca479e2-fe9a-4a98-abbf-ceef05832e00",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Districts K–N",
+              "rows": [
+                {
+                  "id": "7cc62cb6-a47e-4947-8fa4-1b3b63829fd2",
+                  "title": "Kanchipuram",
+                  "description": ""
+                },
+                {
+                  "id": "355743d6-7193-41d2-bd7d-cdcaea0695f5",
+                  "title": "Kanyakumari",
+                  "description": ""
+                },
+                {
+                  "id": "863a584e-c8ec-4b11-bc3e-08a4cba7ded1",
+                  "title": "Karur",
+                  "description": ""
+                },
+                {
+                  "id": "aaf9cadf-5a0c-48bb-aa5c-4fcbba9c6605",
+                  "title": "Krishnagiri",
+                  "description": ""
+                },
+                {
+                  "id": "aab2f427-1fcb-4313-9145-f4f4a3d52d2c",
+                  "title": "Madurai",
+                  "description": ""
+                },
+                {
+                  "id": "9a384b0c-c5bd-48a3-9d2a-32413c040052",
+                  "title": "Mayiladuthurai",
+                  "description": ""
+                },
+                {
+                  "id": "6609c540-8965-4445-a50f-e7adfe7e1cac",
+                  "title": "Nagapattinam",
+                  "description": ""
+                },
+                {
+                  "id": "46b4e009-86b4-4826-8d3d-ece60220f7f3",
+                  "title": "Namakkal",
+                  "description": ""
+                },
+                {
+                  "id": "27d7324f-d0e0-4408-adce-aa9cc09d1193",
+                  "title": "Nilgiris",
+                  "description": ""
+                },
+                {
+                  "id": "92572e3f-1e65-4217-aa06-51b82b506d02",
+                  "title": "More Districts →",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "0908b434-4b62-4e10-857a-06ca534d7b8c",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 1560,
+        "y": -200
+      }
+    },
+    {
+      "nodeId": "b9e2d72b-1cda-49d7-b2ff-4cfde0aa011f",
+      "type": "interactive",
+      "name": "Select District — Page 3/5",
+      "interactiveId": "92572e3f-1e65-4217-aa06-51b82b506d02",
+      "data": {
+        "body": "📍 *Select Your District* (Page 3 of 5)",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "5c5d1196-7093-442a-950e-b097bb6cf0e7",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Districts P–T",
+              "rows": [
+                {
+                  "id": "ba3ff8c8-ca0f-48ce-89ba-2b43d221c4c5",
+                  "title": "Perambalur",
+                  "description": ""
+                },
+                {
+                  "id": "de4c5279-2f88-4452-868b-3882ff89af1d",
+                  "title": "Pudukkottai",
+                  "description": ""
+                },
+                {
+                  "id": "3c095032-3103-46ea-99ab-e27724188071",
+                  "title": "Ramanathapuram",
+                  "description": ""
+                },
+                {
+                  "id": "827b2650-57b4-4050-b140-5010dda33e45",
+                  "title": "Ranipet",
+                  "description": ""
+                },
+                {
+                  "id": "a895e585-1654-43ae-ba19-a621d2f558bd",
+                  "title": "Salem",
+                  "description": ""
+                },
+                {
+                  "id": "86e52715-bbab-4154-893e-77fe9c1a6321",
+                  "title": "Sivaganga",
+                  "description": ""
+                },
+                {
+                  "id": "fc06ad3d-b385-4389-aeb6-897752f1b579",
+                  "title": "Tenkasi",
+                  "description": ""
+                },
+                {
+                  "id": "677b43a6-beda-4533-983b-ec9a16f305eb",
+                  "title": "Thanjavur",
+                  "description": ""
+                },
+                {
+                  "id": "601e3681-6708-41bd-bc05-57db013f5cd0",
+                  "title": "Theni",
+                  "description": ""
+                },
+                {
+                  "id": "692d3006-93e5-47db-b198-eaa4f08356ba",
+                  "title": "More Districts →",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "50703e94-95c6-452a-b527-494541572cd0",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 2080,
+        "y": -200
+      }
+    },
+    {
+      "nodeId": "7d27b7c7-2e3f-427e-afe3-984eb1d2be7f",
+      "type": "interactive",
+      "name": "Select District — Page 4/5",
+      "interactiveId": "692d3006-93e5-47db-b198-eaa4f08356ba",
+      "data": {
+        "body": "📍 *Select Your District* (Page 4 of 5)",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "a6f2d823-819d-4bb8-97c0-db5d36cb093c",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Districts T–T",
+              "rows": [
+                {
+                  "id": "7918ec33-31e5-41c1-9bdc-7c3249aa85be",
+                  "title": "Thoothukudi",
+                  "description": ""
+                },
+                {
+                  "id": "badb8893-a071-432b-bc0e-0f1c6480a1eb",
+                  "title": "Tiruchirappalli",
+                  "description": ""
+                },
+                {
+                  "id": "77abdaea-d410-4048-b25c-b002a01f48e2",
+                  "title": "Tirunelveli",
+                  "description": ""
+                },
+                {
+                  "id": "aab74936-695e-49de-9d36-6bcc65b41585",
+                  "title": "Tirupathur",
+                  "description": ""
+                },
+                {
+                  "id": "306da1f3-b154-43ce-a4ca-4f8a9df7e6af",
+                  "title": "Tiruppur",
+                  "description": ""
+                },
+                {
+                  "id": "fdf4af0f-9539-4b48-bc97-a27a7f6d4a71",
+                  "title": "Tiruvallur",
+                  "description": ""
+                },
+                {
+                  "id": "a84d3ec0-15e3-4b54-8171-030a4925f657",
+                  "title": "Tiruvannamalai",
+                  "description": ""
+                },
+                {
+                  "id": "89011090-ba04-4f7e-97fe-927592586ec7",
+                  "title": "Tiruvarur",
+                  "description": ""
+                },
+                {
+                  "id": "d05d4cc2-267b-4396-a8f7-5a700f6ead38",
+                  "title": "More Districts →",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "b9e2d72b-1cda-49d7-b2ff-4cfde0aa011f",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 2600,
+        "y": -200
+      }
+    },
+    {
+      "nodeId": "28630565-ecb7-455d-bf2b-90944c86f117",
+      "type": "interactive",
+      "name": "Select District — Page 5/5",
+      "interactiveId": "d05d4cc2-267b-4396-a8f7-5a700f6ead38",
+      "data": {
+        "body": "📍 *Select Your District* (Page 5 of 5)",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "c21b4256-b8ed-4f0c-9477-39b0fe0d6b88",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Districts V–V",
+              "rows": [
+                {
+                  "id": "a9c5bb2f-bc76-41f8-8267-0bb6f9cda120",
+                  "title": "Vellore",
+                  "description": ""
+                },
+                {
+                  "id": "cc453dda-c6fa-4547-b5d8-997dad1cb49e",
+                  "title": "Viluppuram",
+                  "description": ""
+                },
+                {
+                  "id": "9cab56f3-a064-4ed0-bae1-aef4e6d87430",
+                  "title": "Virudhunagar",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "7d27b7c7-2e3f-427e-afe3-984eb1d2be7f",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 3120,
+        "y": -200
+      }
+    },
+    {
+      "nodeId": "b9495c11-a396-4853-83ec-d4166a8c2aed",
+      "type": "interactive",
+      "name": "Assembly: Ariyalur p1",
+      "interactiveId": "9b73a75a-130a-4ff7-89c0-1bd6176f40de",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Ariyalur*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "feefe65c-945f-4d7a-b3d1-a520ae85d582",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Ariyalur Assemblies",
+              "rows": [
+                {
+                  "id": "f880d13e-bed5-49f4-b7ff-8af2c19d82ae",
+                  "title": "Ariyalur",
+                  "description": ""
+                },
+                {
+                  "id": "706cddf0-c2b6-46d2-afec-bfe301e81509",
+                  "title": "Jayankondam",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "0908b434-4b62-4e10-857a-06ca534d7b8c",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 3120,
+        "y": 820
+      }
+    },
+    {
+      "nodeId": "d7e59816-8829-49b7-8e51-5a345d772835",
+      "type": "interactive",
+      "name": "Assembly: Chengalpattu p1",
+      "interactiveId": "06db8636-68d3-4e22-96c5-22d73655d8d8",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Chengalpattu*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "5244f111-7d00-4227-ab72-25ba8cb77659",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Chengalpattu Assemblies",
+              "rows": [
+                {
+                  "id": "02065807-981e-4b10-9f5f-6427f0abfca7",
+                  "title": "Shozhinganallur",
+                  "description": ""
+                },
+                {
+                  "id": "40c2b3f4-93b1-459c-9378-798b4200feb7",
+                  "title": "Pallavaram",
+                  "description": ""
+                },
+                {
+                  "id": "78689b52-a907-4a7f-b30d-bf4db26f8a0e",
+                  "title": "Tambaram",
+                  "description": ""
+                },
+                {
+                  "id": "296de70f-811f-4555-958e-43f74edc28cf",
+                  "title": "Chengalpattu",
+                  "description": ""
+                },
+                {
+                  "id": "c44d4aa8-cc85-4bc4-b7e9-004f61837faf",
+                  "title": "Thiruporur",
+                  "description": ""
+                },
+                {
+                  "id": "0991c6d7-6342-4ef1-abfe-f8808a5073b4",
+                  "title": "Cheyyur",
+                  "description": ""
+                },
+                {
+                  "id": "2fddc080-326d-4d4a-9e36-580a1b3a3aa4",
+                  "title": "Madurantakam",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "0908b434-4b62-4e10-857a-06ca534d7b8c",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 3640,
+        "y": 820
+      }
+    },
+    {
+      "nodeId": "0507d06f-b195-42b9-8e59-4d78fef7c67a",
+      "type": "interactive",
+      "name": "Assembly: Chennai p1",
+      "interactiveId": "a29c677c-f14c-4ac8-9b34-cf6033fd61e2",
+      "data": {
+        "body": "🗳️ *Select Your Assembly (Page 1/2)*\nDistrict: *Chennai*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "69f04907-dc81-47b1-9d3b-899d7d1e19f5",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Chennai Assemblies",
+              "rows": [
+                {
+                  "id": "e7dd773a-e82b-48f6-92fb-9b91902571e7",
+                  "title": "Dr.Radhakrishnan Nagar",
+                  "description": ""
+                },
+                {
+                  "id": "a6f47159-f5bd-4008-bb6d-d025db30f2ec",
+                  "title": "Perambur",
+                  "description": ""
+                },
+                {
+                  "id": "d93b5366-2de9-4998-b189-040940ec654c",
+                  "title": "Kolathur",
+                  "description": ""
+                },
+                {
+                  "id": "d4298fe3-8b9f-4427-bd32-5e86553e1d16",
+                  "title": "Villivakkam",
+                  "description": ""
+                },
+                {
+                  "id": "704b59ec-61c8-483c-85e4-8e99276746fc",
+                  "title": "Thiru-Vi-Ka-Nagar",
+                  "description": ""
+                },
+                {
+                  "id": "fe116ff4-845c-4161-a101-cfe1d4bc9c7f",
+                  "title": "Egmore",
+                  "description": ""
+                },
+                {
+                  "id": "a13016bd-e9c3-4c9b-b4b6-f1c3b865b65f",
+                  "title": "Royapuram",
+                  "description": ""
+                },
+                {
+                  "id": "aacb458b-f3ae-463d-a452-00b9330b73ad",
+                  "title": "Harbour",
+                  "description": ""
+                },
+                {
+                  "id": "402b760e-ec53-46ea-8fd6-71c5d508561e",
+                  "title": "Chepauk-Thiruvallikeni",
+                  "description": ""
+                },
+                {
+                  "id": "d08709bd-3a04-429c-b7fa-4c99ce5b10ed",
+                  "title": "More Assemblies →",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "0908b434-4b62-4e10-857a-06ca534d7b8c",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 4160,
+        "y": 820
+      }
+    },
+    {
+      "nodeId": "62298785-304d-442e-86fe-d48b5bd83356",
+      "type": "interactive",
+      "name": "Assembly: Chennai p2",
+      "interactiveId": null,
+      "data": {
+        "body": "🗳️ *Select Your Assembly (Page 2/2)*\nDistrict: *Chennai*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "fbcced50-f81b-401a-80ba-c8005b280ee6",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Chennai Assemblies",
+              "rows": [
+                {
+                  "id": "053a7c02-d8ea-45db-9ce5-a02874d29132",
+                  "title": "Thousand Lights",
+                  "description": ""
+                },
+                {
+                  "id": "18f1a336-6e58-4129-a336-5a97bf1b6c71",
+                  "title": "Anna Nagar",
+                  "description": ""
+                },
+                {
+                  "id": "6514b583-3fa4-48ea-922e-816208d50d25",
+                  "title": "Virugampakkam",
+                  "description": ""
+                },
+                {
+                  "id": "56d0e682-a639-42be-b588-dff229abe775",
+                  "title": "Saidapet",
+                  "description": ""
+                },
+                {
+                  "id": "d4f2aecf-364c-4bc2-b6e4-7beeba11e141",
+                  "title": "Thiyagarayanagar",
+                  "description": ""
+                },
+                {
+                  "id": "28a00570-d7a5-4608-867e-b05d8a171138",
+                  "title": "Mylapore",
+                  "description": ""
+                },
+                {
+                  "id": "1ffee6e4-b05c-4f18-b0a8-55140e3a5df2",
+                  "title": "Velachery",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "0507d06f-b195-42b9-8e59-4d78fef7c67a",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 4160,
+        "y": 820
+      }
+    },
+    {
+      "nodeId": "dae1f6ee-3342-49e0-90c6-029286218230",
+      "type": "interactive",
+      "name": "Assembly: Coimbatore p1",
+      "interactiveId": "b774f858-945b-4a6f-83de-c2bcd5fa284c",
+      "data": {
+        "body": "🗳️ *Select Your Assembly (Page 1/2)*\nDistrict: *Coimbatore*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "35092740-f6aa-4e13-930e-4d776e82c313",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Coimbatore Assemblies",
+              "rows": [
+                {
+                  "id": "9d51d677-b8fd-4ddc-bd7a-f3b5ab11ff4a",
+                  "title": "Mettuppalayam",
+                  "description": ""
+                },
+                {
+                  "id": "0a56a402-4176-48ce-a50f-38d7bdb02d16",
+                  "title": "Sulur",
+                  "description": ""
+                },
+                {
+                  "id": "1b93cded-f151-4366-b0ac-a0bb2293873f",
+                  "title": "Kavundampalayam",
+                  "description": ""
+                },
+                {
+                  "id": "e46822bc-b8dc-4491-b4ca-747b1a2f1d1c",
+                  "title": "Coimbatore North",
+                  "description": ""
+                },
+                {
+                  "id": "efa3096b-9b8f-4d26-8e54-0fc74dd98b39",
+                  "title": "Thondamuthur",
+                  "description": ""
+                },
+                {
+                  "id": "fa9aef0c-fc45-43db-a1ab-944ea7d593ba",
+                  "title": "Coimbatore South",
+                  "description": ""
+                },
+                {
+                  "id": "c889c42c-88fe-416d-a887-9858173e996a",
+                  "title": "Singanallur",
+                  "description": ""
+                },
+                {
+                  "id": "aee638ae-2d85-4bf4-82d2-7edca99fa5ca",
+                  "title": "Kinathukadavu",
+                  "description": ""
+                },
+                {
+                  "id": "0c26a74c-28d4-4c63-963a-82c222d3d318",
+                  "title": "Pollachi",
+                  "description": ""
+                },
+                {
+                  "id": "f5c6fb77-4e68-4a13-a15f-f4e1a7cfa8e5",
+                  "title": "More Assemblies →",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "0908b434-4b62-4e10-857a-06ca534d7b8c",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 4680,
+        "y": 820
+      }
+    },
+    {
+      "nodeId": "8a7292ad-9fc6-425f-ab45-76c4fc3f5426",
+      "type": "interactive",
+      "name": "Assembly: Coimbatore p2",
+      "interactiveId": null,
+      "data": {
+        "body": "🗳️ *Select Your Assembly (Page 2/2)*\nDistrict: *Coimbatore*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "cef5c396-abe4-4453-8e6b-505c9af135a3",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Coimbatore Assemblies",
+              "rows": [
+                {
+                  "id": "1d5ebe03-8ef9-4124-9b92-bd4a2cecca66",
+                  "title": "Valparai",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "dae1f6ee-3342-49e0-90c6-029286218230",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 4680,
+        "y": 820
+      }
+    },
+    {
+      "nodeId": "f8239f24-2327-4cc4-8bad-d5c54c13e8b9",
+      "type": "interactive",
+      "name": "Assembly: Cuddalore p1",
+      "interactiveId": "5818c1f0-d33c-45ae-b115-60ce83ef5fbb",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Cuddalore*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "d697b2ff-3088-4c8b-8498-13fd60ec0cbb",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Cuddalore Assemblies",
+              "rows": [
+                {
+                  "id": "08b209da-e9c2-465e-9920-4c57cd33b924",
+                  "title": "Tittakudi",
+                  "description": ""
+                },
+                {
+                  "id": "12f44f78-7613-49ff-94bd-8b0dd7fd0e58",
+                  "title": "Vriddhachalam",
+                  "description": ""
+                },
+                {
+                  "id": "d74c89ea-d2ed-48e1-b215-5b14e3ab6a28",
+                  "title": "Neyveli",
+                  "description": ""
+                },
+                {
+                  "id": "3af22fc9-7f58-4ba1-843b-2fb4b7ff4892",
+                  "title": "Panruti",
+                  "description": ""
+                },
+                {
+                  "id": "3ec11ca1-83eb-422d-ab56-aa8b4b4a0516",
+                  "title": "Cuddalore",
+                  "description": ""
+                },
+                {
+                  "id": "1e90e6a0-e30e-463f-994d-eccf8f47f1ec",
+                  "title": "Kurinjipadi",
+                  "description": ""
+                },
+                {
+                  "id": "76f4627d-5142-4c82-b370-1369885896de",
+                  "title": "Bhuvanagiri",
+                  "description": ""
+                },
+                {
+                  "id": "36b1ca4c-3695-4447-89fc-430ebd1be618",
+                  "title": "Chidambaram",
+                  "description": ""
+                },
+                {
+                  "id": "44b79033-08d5-4fa0-be84-51b126dd48c7",
+                  "title": "Kattumannarkoil",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "0908b434-4b62-4e10-857a-06ca534d7b8c",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 5200,
+        "y": 820
+      }
+    },
+    {
+      "nodeId": "82fe1ad3-9220-4fbc-86f9-abc4a4fc8bb2",
+      "type": "interactive",
+      "name": "Assembly: Dharmapuri p1",
+      "interactiveId": "475be4d4-839f-4f73-97a4-85f688b0addc",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Dharmapuri*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "e4310cc9-302a-4c3f-b29e-4e06539004d6",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Dharmapuri Assemblies",
+              "rows": [
+                {
+                  "id": "f0741abd-02f0-4e1f-9adb-6b99b872f7b0",
+                  "title": "Palacodu",
+                  "description": ""
+                },
+                {
+                  "id": "af3ab7c4-80aa-4f34-9c7c-d629cc5d44a0",
+                  "title": "Pennagaram",
+                  "description": ""
+                },
+                {
+                  "id": "efe81c05-a0fd-4f45-8f3e-38b8ef1bd23a",
+                  "title": "Dharmapuri",
+                  "description": ""
+                },
+                {
+                  "id": "c64b1f67-f0ed-4ed4-8b58-9f196bb21090",
+                  "title": "Pappireddipatti",
+                  "description": ""
+                },
+                {
+                  "id": "3861339a-23d0-4a57-b613-1689eea244d6",
+                  "title": "Harur",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "0908b434-4b62-4e10-857a-06ca534d7b8c",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 5720,
+        "y": 820
+      }
+    },
+    {
+      "nodeId": "746fc652-db56-4eb5-a2f2-65dea32bbfa1",
+      "type": "interactive",
+      "name": "Assembly: Dindigul p1",
+      "interactiveId": "bb68f4aa-9ffb-4159-a5eb-1fafd9045462",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Dindigul*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "e620f592-051c-4913-8ef1-6701d8dd21da",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Dindigul Assemblies",
+              "rows": [
+                {
+                  "id": "9f35155f-3ad0-4029-94bf-a0086d796476",
+                  "title": "Palani",
+                  "description": ""
+                },
+                {
+                  "id": "d4ec5a0d-cfa5-4412-956c-2035e13a2bd4",
+                  "title": "Oddanchatram",
+                  "description": ""
+                },
+                {
+                  "id": "39e7bb7f-faba-48a0-be42-8cf62defa646",
+                  "title": "Athoor",
+                  "description": ""
+                },
+                {
+                  "id": "0eb25c37-e258-458d-9c8b-c419a4462877",
+                  "title": "Nilakkottai",
+                  "description": ""
+                },
+                {
+                  "id": "cca09f62-84f6-4fdd-878a-82b8c1c7e470",
+                  "title": "Natham",
+                  "description": ""
+                },
+                {
+                  "id": "71deef86-3f86-413f-a442-42f9d5caecf8",
+                  "title": "Dindigul",
+                  "description": ""
+                },
+                {
+                  "id": "6ed9c335-4530-4ab4-aa15-3eceb63727f6",
+                  "title": "Vedasandur",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "0908b434-4b62-4e10-857a-06ca534d7b8c",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 6240,
+        "y": 820
+      }
+    },
+    {
+      "nodeId": "a86afa81-f4ba-4c3e-92bc-d0c2dc0d6e2f",
+      "type": "interactive",
+      "name": "Assembly: Erode p1",
+      "interactiveId": "da583406-b849-44fb-a51a-6a1764a825e0",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Erode*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "5e2f5d8e-6104-4908-b3b0-5bfad2afe49f",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Erode Assemblies",
+              "rows": [
+                {
+                  "id": "8f55eb14-e5b9-46b2-a6c0-323e05c221b1",
+                  "title": "Erode East",
+                  "description": ""
+                },
+                {
+                  "id": "bad9cbb3-500e-4657-ad9a-ffc4a08ca08d",
+                  "title": "Erode West",
+                  "description": ""
+                },
+                {
+                  "id": "3013b671-41ad-47c3-a635-8109e9fc4cdf",
+                  "title": "Modakkurichi",
+                  "description": ""
+                },
+                {
+                  "id": "c6cf8602-1bcc-4b4c-8551-c46fc0922492",
+                  "title": "Perundurai",
+                  "description": ""
+                },
+                {
+                  "id": "e8091823-d9a8-4189-ac1c-48f74ab392dc",
+                  "title": "Bhavani",
+                  "description": ""
+                },
+                {
+                  "id": "14458022-c60e-428f-ba16-95d8c169c021",
+                  "title": "Anthiyur",
+                  "description": ""
+                },
+                {
+                  "id": "79db4a37-7c7c-4657-846a-b3b37e3cdb84",
+                  "title": "Gobichettipalayam",
+                  "description": ""
+                },
+                {
+                  "id": "ede834b4-953f-4a12-b057-d6fcee97cb6c",
+                  "title": "Bhavanisagar",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "0908b434-4b62-4e10-857a-06ca534d7b8c",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 6760,
+        "y": 820
+      }
+    },
+    {
+      "nodeId": "631569ee-ae6b-47b2-9c48-c6b953c2d4f6",
+      "type": "interactive",
+      "name": "Assembly: Kallakurichi p1",
+      "interactiveId": "5cf88aba-8aab-47c7-b114-6bc09d04b26f",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Kallakurichi*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "de399af0-39e4-4d1a-b56b-9ff5910fa6cc",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Kallakurichi Assemblies",
+              "rows": [
+                {
+                  "id": "cfcbac9f-4320-4c30-8416-8bbbfcf62258",
+                  "title": "Ulundurpettai",
+                  "description": ""
+                },
+                {
+                  "id": "290f25c7-543e-4954-9c03-a4048a091d03",
+                  "title": "Rishivandiyam",
+                  "description": ""
+                },
+                {
+                  "id": "2978d8c0-94a9-483d-b99e-75ab39002686",
+                  "title": "Sankarapuram",
+                  "description": ""
+                },
+                {
+                  "id": "de0a5847-8e08-43eb-9d87-583cdd630796",
+                  "title": "Kallakurichi",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "0908b434-4b62-4e10-857a-06ca534d7b8c",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 7280,
+        "y": 820
+      }
+    },
+    {
+      "nodeId": "58e07313-067f-42fe-a460-1049cfc71948",
+      "type": "interactive",
+      "name": "Assembly: Kanchipuram p1",
+      "interactiveId": "7cc62cb6-a47e-4947-8fa4-1b3b63829fd2",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Kanchipuram*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "3deba5d4-43d5-4d72-a0ab-95e72952c569",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Kanchipuram Assemblies",
+              "rows": [
+                {
+                  "id": "8b102968-da33-474c-81a7-c5cc1e36e70c",
+                  "title": "Alandur",
+                  "description": ""
+                },
+                {
+                  "id": "5a68e9a4-c4f3-4ebf-9b70-8ae8eabc7f68",
+                  "title": "Sriperumbudur",
+                  "description": ""
+                },
+                {
+                  "id": "8d77bd53-5fe8-4af3-9dc0-70b08e188030",
+                  "title": "Uthiramerur",
+                  "description": ""
+                },
+                {
+                  "id": "a8e1a9b5-82de-4389-ae99-dd7dee290daa",
+                  "title": "Kancheepuram",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "50703e94-95c6-452a-b527-494541572cd0",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 7800,
+        "y": 820
+      }
+    },
+    {
+      "nodeId": "7cff8931-1d97-41b1-ba0a-3a8237bc6f11",
+      "type": "interactive",
+      "name": "Assembly: Kanyakumari p1",
+      "interactiveId": "355743d6-7193-41d2-bd7d-cdcaea0695f5",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Kanyakumari*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "c051ecae-791a-4622-9cee-47d50489d293",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Kanyakumari Assemblies",
+              "rows": [
+                {
+                  "id": "0d6ed6a7-9ffc-4805-a31c-45fa2f618655",
+                  "title": "Kanniyakumari",
+                  "description": ""
+                },
+                {
+                  "id": "aa8b4ebc-16db-4926-9a18-be128f00a7fe",
+                  "title": "Nagercoil",
+                  "description": ""
+                },
+                {
+                  "id": "a10c6e9d-1928-454f-b5dd-8edb3cb5f0e9",
+                  "title": "Colachal",
+                  "description": ""
+                },
+                {
+                  "id": "c1aab8f6-0fcb-4f07-bee3-d617a3548a0d",
+                  "title": "Padmanabhapuram",
+                  "description": ""
+                },
+                {
+                  "id": "53ee170b-2643-4343-abe0-7f316350f8eb",
+                  "title": "Vilavancode",
+                  "description": ""
+                },
+                {
+                  "id": "44a066b7-6e30-4393-946e-f6b4dc80e10a",
+                  "title": "Killiyoor",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "50703e94-95c6-452a-b527-494541572cd0",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 3120,
+        "y": 1120
+      }
+    },
+    {
+      "nodeId": "acb5fccf-2e7e-4895-8ec5-4857fbd03455",
+      "type": "interactive",
+      "name": "Assembly: Karur p1",
+      "interactiveId": "863a584e-c8ec-4b11-bc3e-08a4cba7ded1",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Karur*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "fda191a6-0490-40ce-b15c-7c1084a94e15",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Karur Assemblies",
+              "rows": [
+                {
+                  "id": "242e2260-7db4-49c8-bc95-d26e14f51067",
+                  "title": "Aravakurichi",
+                  "description": ""
+                },
+                {
+                  "id": "1eb45505-16b4-4266-aa03-1b8b36e3a737",
+                  "title": "Karur",
+                  "description": ""
+                },
+                {
+                  "id": "e51e5ae6-f9a4-4e8d-88b1-a6e42bb70406",
+                  "title": "Krishnarayapuram",
+                  "description": ""
+                },
+                {
+                  "id": "2ff47d02-90bc-4b85-9d19-7e0e1088c0fc",
+                  "title": "Kulithalai",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "50703e94-95c6-452a-b527-494541572cd0",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 3640,
+        "y": 1120
+      }
+    },
+    {
+      "nodeId": "b8870b90-92ae-4163-a68a-f93129c99550",
+      "type": "interactive",
+      "name": "Assembly: Krishnagiri p1",
+      "interactiveId": "aaf9cadf-5a0c-48bb-aa5c-4fcbba9c6605",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Krishnagiri*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "fb685660-8ebb-4020-87d7-82f446744140",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Krishnagiri Assemblies",
+              "rows": [
+                {
+                  "id": "63c9839c-4a19-46e5-aafb-cba12cf5e803",
+                  "title": "Uthangarai",
+                  "description": ""
+                },
+                {
+                  "id": "e0a4ad9a-f5fa-4d7b-8a94-1418d545e8a9",
+                  "title": "Bargur",
+                  "description": ""
+                },
+                {
+                  "id": "69b3fd50-0379-45cc-80d7-460a4037ef1e",
+                  "title": "Krishnagiri",
+                  "description": ""
+                },
+                {
+                  "id": "143d19df-6f76-48f3-af12-b3d32433f129",
+                  "title": "Veppanahalli",
+                  "description": ""
+                },
+                {
+                  "id": "41fa116e-7e54-48c2-bb7e-bc6239380120",
+                  "title": "Hosur",
+                  "description": ""
+                },
+                {
+                  "id": "55e26f45-7ed7-4a37-b3b8-d0ed4a6b628b",
+                  "title": "Thalli",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "50703e94-95c6-452a-b527-494541572cd0",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 4160,
+        "y": 1120
+      }
+    },
+    {
+      "nodeId": "6fc10f94-fa05-4328-b1b7-69f57d3d2a6a",
+      "type": "interactive",
+      "name": "Assembly: Madurai p1",
+      "interactiveId": "aab2f427-1fcb-4313-9145-f4f4a3d52d2c",
+      "data": {
+        "body": "🗳️ *Select Your Assembly (Page 1/2)*\nDistrict: *Madurai*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "e1836a54-ded1-4cf5-ae43-7ed24a0d93a2",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Madurai Assemblies",
+              "rows": [
+                {
+                  "id": "46853888-36f8-45eb-a765-90501bf99862",
+                  "title": "Melur",
+                  "description": ""
+                },
+                {
+                  "id": "bf8f96fa-9d75-4199-adb7-599ff0d49880",
+                  "title": "Madurai East",
+                  "description": ""
+                },
+                {
+                  "id": "297ffa7e-0d09-4d60-b733-ea5587eda078",
+                  "title": "Sholavandan",
+                  "description": ""
+                },
+                {
+                  "id": "8fce0131-8ac3-4848-aa74-49fcc633bf39",
+                  "title": "Madurai North",
+                  "description": ""
+                },
+                {
+                  "id": "c8ad0392-c4f7-4bbb-85ae-0c56f2ac6334",
+                  "title": "Madurai South",
+                  "description": ""
+                },
+                {
+                  "id": "59489e0e-cb9f-470d-b22c-23f0b63d5757",
+                  "title": "Madurai Central",
+                  "description": ""
+                },
+                {
+                  "id": "4d5459ab-baed-4db6-83cb-823fdbc6aa83",
+                  "title": "Madurai West",
+                  "description": ""
+                },
+                {
+                  "id": "8fd7b1e4-6a22-46ba-aa74-a769f12fee89",
+                  "title": "Thiruparankundram",
+                  "description": ""
+                },
+                {
+                  "id": "905e5a16-d5af-4dc2-9a10-31bf96d0fa40",
+                  "title": "Thirumangalam",
+                  "description": ""
+                },
+                {
+                  "id": "556dc3bb-eec7-4760-b210-90c05b9fa929",
+                  "title": "More Assemblies →",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "50703e94-95c6-452a-b527-494541572cd0",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 4680,
+        "y": 1120
+      }
+    },
+    {
+      "nodeId": "e69bb48f-d5c8-4dd9-8711-81028dc14ee4",
+      "type": "interactive",
+      "name": "Assembly: Madurai p2",
+      "interactiveId": null,
+      "data": {
+        "body": "🗳️ *Select Your Assembly (Page 2/2)*\nDistrict: *Madurai*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "a4c2739a-a074-44a1-b461-c63ac01ee242",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Madurai Assemblies",
+              "rows": [
+                {
+                  "id": "264f6545-965e-4101-9a88-00f13f6fba2a",
+                  "title": "Usilampatti",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "6fc10f94-fa05-4328-b1b7-69f57d3d2a6a",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 4680,
+        "y": 1120
+      }
+    },
+    {
+      "nodeId": "5f54f476-9324-44b4-9b89-d9736a974712",
+      "type": "interactive",
+      "name": "Assembly: Mayiladuthurai p1",
+      "interactiveId": "9a384b0c-c5bd-48a3-9d2a-32413c040052",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Mayiladuthurai*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "4a3fc14c-b58d-4594-9a80-b05be9fb4f68",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Mayiladuthurai Assemblies",
+              "rows": [
+                {
+                  "id": "191bf714-8a6e-4e20-a47b-de81fd542d16",
+                  "title": "Sirkazhi",
+                  "description": ""
+                },
+                {
+                  "id": "3e15c50a-d428-4a34-ae28-7863b854c7a1",
+                  "title": "Mayiladuthurai",
+                  "description": ""
+                },
+                {
+                  "id": "a88ca0e7-7e3c-4fa1-b0b1-a04829cc94ac",
+                  "title": "Poompuhar",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "50703e94-95c6-452a-b527-494541572cd0",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 5200,
+        "y": 1120
+      }
+    },
+    {
+      "nodeId": "cdbf64c4-8126-4c1d-8e71-1a9e609bc221",
+      "type": "interactive",
+      "name": "Assembly: Nagapattinam p1",
+      "interactiveId": "6609c540-8965-4445-a50f-e7adfe7e1cac",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Nagapattinam*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "fd45ce92-dade-4c3a-beee-21beb08c4c7f",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Nagapattinam Assemblies",
+              "rows": [
+                {
+                  "id": "4a8dc1ef-270c-475f-ad5d-17aba4263ddb",
+                  "title": "Nagapattinam",
+                  "description": ""
+                },
+                {
+                  "id": "8125e31b-3d64-4541-a2af-028ea7704466",
+                  "title": "Kilvelur",
+                  "description": ""
+                },
+                {
+                  "id": "fc074cd1-02bf-4ecd-b8c3-a8e87d784fde",
+                  "title": "Vedaranyam",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "50703e94-95c6-452a-b527-494541572cd0",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 5720,
+        "y": 1120
+      }
+    },
+    {
+      "nodeId": "eb79f315-b7f1-40fe-a513-5afb678cb96a",
+      "type": "interactive",
+      "name": "Assembly: Namakkal p1",
+      "interactiveId": "46b4e009-86b4-4826-8d3d-ece60220f7f3",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Namakkal*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "6e0ebb8b-6828-4072-b32b-d03e1d72ff6b",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Namakkal Assemblies",
+              "rows": [
+                {
+                  "id": "33127499-024d-4314-b418-e9ea2db6b3a6",
+                  "title": "Rasipuram",
+                  "description": ""
+                },
+                {
+                  "id": "8c91d524-7064-4491-8479-ed35dc23ae4b",
+                  "title": "Senthamangalam",
+                  "description": ""
+                },
+                {
+                  "id": "edfed23e-26ba-4387-8ff6-1b4454f6618e",
+                  "title": "Namakkal",
+                  "description": ""
+                },
+                {
+                  "id": "fdc07737-5737-4a75-a095-00567ee4f94b",
+                  "title": "Paramathi-Velur",
+                  "description": ""
+                },
+                {
+                  "id": "dc1851ed-1093-4e24-9971-37779ddabc61",
+                  "title": "Tiruchengodu",
+                  "description": ""
+                },
+                {
+                  "id": "a4ccd16e-743b-483a-af7d-c0fb7ab7c4f5",
+                  "title": "Kumarapalayam",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "50703e94-95c6-452a-b527-494541572cd0",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 6240,
+        "y": 1120
+      }
+    },
+    {
+      "nodeId": "fadeccca-9ede-4f88-8fde-63826a241810",
+      "type": "interactive",
+      "name": "Assembly: Nilgiris p1",
+      "interactiveId": "27d7324f-d0e0-4408-adce-aa9cc09d1193",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Nilgiris*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "08d09003-c2bd-4f4f-ad6f-b400e972d5ab",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Nilgiris Assemblies",
+              "rows": [
+                {
+                  "id": "6b1f4e1c-be95-475b-a682-42b4b05bb5e7",
+                  "title": "Udhagamandalam",
+                  "description": ""
+                },
+                {
+                  "id": "c8e26fb8-1f12-46dc-8408-c065bb1866d7",
+                  "title": "Gudalur",
+                  "description": ""
+                },
+                {
+                  "id": "a081e26a-ed18-481b-8418-ec2d8e79b0e2",
+                  "title": "Coonoor",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "50703e94-95c6-452a-b527-494541572cd0",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 6760,
+        "y": 1120
+      }
+    },
+    {
+      "nodeId": "363d0860-0ec4-4ca2-8019-bb1b7212eb0e",
+      "type": "interactive",
+      "name": "Assembly: Perambalur p1",
+      "interactiveId": "ba3ff8c8-ca0f-48ce-89ba-2b43d221c4c5",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Perambalur*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "c7c88b06-b7b4-40c7-8e91-c20f139b1ba5",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Perambalur Assemblies",
+              "rows": [
+                {
+                  "id": "7c78fe96-cde9-4e6c-b649-863c2e5cf8f8",
+                  "title": "Perambalur",
+                  "description": ""
+                },
+                {
+                  "id": "37a6727d-44b2-43c5-8b86-7a9ae8fa3b11",
+                  "title": "Kunnam",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "b9e2d72b-1cda-49d7-b2ff-4cfde0aa011f",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 7280,
+        "y": 1120
+      }
+    },
+    {
+      "nodeId": "097662f8-5185-4358-90c4-0e22413ad0bc",
+      "type": "interactive",
+      "name": "Assembly: Pudukkottai p1",
+      "interactiveId": "de4c5279-2f88-4452-868b-3882ff89af1d",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Pudukkottai*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "76d0de9e-9cc3-4cf4-90fe-c73f0b29f377",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Pudukkottai Assemblies",
+              "rows": [
+                {
+                  "id": "85e95618-1ecd-4599-bdfa-d1bfc67f65ca",
+                  "title": "Gandarvakkottai",
+                  "description": ""
+                },
+                {
+                  "id": "2e1102eb-3c40-47f8-8aaa-65a6f616cdc2",
+                  "title": "Viralimalai",
+                  "description": ""
+                },
+                {
+                  "id": "52f5985a-7b30-444f-80a7-fa696a22fe1e",
+                  "title": "Pudukkottai",
+                  "description": ""
+                },
+                {
+                  "id": "d9e44e14-8c67-464a-8845-0ec917ae349b",
+                  "title": "Thirumayam",
+                  "description": ""
+                },
+                {
+                  "id": "e74c2f71-29a8-4773-86b5-7fc766d5ba37",
+                  "title": "Alangudi",
+                  "description": ""
+                },
+                {
+                  "id": "c467836b-2624-43aa-baed-0d5a250b25f9",
+                  "title": "Aranthangi",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "b9e2d72b-1cda-49d7-b2ff-4cfde0aa011f",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 7800,
+        "y": 1120
+      }
+    },
+    {
+      "nodeId": "7b4a7fc7-41ed-43f6-84a6-8a324a4ef2ce",
+      "type": "interactive",
+      "name": "Assembly: Ramanathapuram p1",
+      "interactiveId": "3c095032-3103-46ea-99ab-e27724188071",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Ramanathapuram*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "35b5cf03-66f8-4020-9b51-2e3ddc4e7735",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Ramanathapuram Assemblies",
+              "rows": [
+                {
+                  "id": "05919ca5-d96e-4ca0-8e5a-a6eb3aee26ea",
+                  "title": "Paramakudi",
+                  "description": ""
+                },
+                {
+                  "id": "ec9531fa-1daf-4657-9bc4-bc9d3d10add3",
+                  "title": "Tiruvadanai",
+                  "description": ""
+                },
+                {
+                  "id": "a2b5cc13-5491-4738-b0eb-9313bc9594a7",
+                  "title": "Ramanathapuram",
+                  "description": ""
+                },
+                {
+                  "id": "3ad72db0-103e-4d56-9488-7bb76b260ccc",
+                  "title": "Mudhukulathur",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "b9e2d72b-1cda-49d7-b2ff-4cfde0aa011f",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 3120,
+        "y": 1420
+      }
+    },
+    {
+      "nodeId": "260d971f-93c2-4d94-a58e-822c6366ecfc",
+      "type": "interactive",
+      "name": "Assembly: Ranipet p1",
+      "interactiveId": "827b2650-57b4-4050-b140-5010dda33e45",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Ranipet*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "4fce21ea-f6a4-4ea7-96ac-a040a1b77857",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Ranipet Assemblies",
+              "rows": [
+                {
+                  "id": "86db9f5a-f96d-4ea7-ad5c-3a9ca600fb61",
+                  "title": "Arakkonam",
+                  "description": ""
+                },
+                {
+                  "id": "3b8af120-a391-4a66-b49b-6c7a4958fdc6",
+                  "title": "Sholinghur",
+                  "description": ""
+                },
+                {
+                  "id": "c9f0be54-e9c5-49b7-9654-046142bd9c8c",
+                  "title": "Ranipet",
+                  "description": ""
+                },
+                {
+                  "id": "82b8368b-0ba6-47ac-851d-6a10697137c6",
+                  "title": "Arcot",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "b9e2d72b-1cda-49d7-b2ff-4cfde0aa011f",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 3640,
+        "y": 1420
+      }
+    },
+    {
+      "nodeId": "128a3d92-0860-4697-bff3-df027858c458",
+      "type": "interactive",
+      "name": "Assembly: Salem p1",
+      "interactiveId": "a895e585-1654-43ae-ba19-a621d2f558bd",
+      "data": {
+        "body": "🗳️ *Select Your Assembly (Page 1/2)*\nDistrict: *Salem*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "322f63ce-a832-4bc5-8888-bf89acbbb5e6",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Salem Assemblies",
+              "rows": [
+                {
+                  "id": "db2b695d-74db-4741-962b-529ec4a2372c",
+                  "title": "Gangavalli",
+                  "description": ""
+                },
+                {
+                  "id": "841810ab-5820-4e24-b615-b90368635bd5",
+                  "title": "Attur",
+                  "description": ""
+                },
+                {
+                  "id": "abd295cb-fa3b-4f18-8423-c86c78f5d8d1",
+                  "title": "Yercaud",
+                  "description": ""
+                },
+                {
+                  "id": "0fe1bb27-66ac-47cd-b2b9-6c28f2e0a1c2",
+                  "title": "Omalur",
+                  "description": ""
+                },
+                {
+                  "id": "822f6b83-501a-4c06-9d46-9252f8b17883",
+                  "title": "Mettur",
+                  "description": ""
+                },
+                {
+                  "id": "b9750ff5-c71f-4f14-b176-2620da68b0e5",
+                  "title": "Edappadi",
+                  "description": ""
+                },
+                {
+                  "id": "efc2ba4c-a525-4359-8918-f9b53dc4f956",
+                  "title": "Sankari",
+                  "description": ""
+                },
+                {
+                  "id": "6f8eea3a-058a-42a2-a333-134813912367",
+                  "title": "Salem West",
+                  "description": ""
+                },
+                {
+                  "id": "d64495f5-93a6-473e-980d-96bc5e41caaa",
+                  "title": "Salem North",
+                  "description": ""
+                },
+                {
+                  "id": "e3a4e91b-2c9e-4388-ac96-a61ee003b1e4",
+                  "title": "More Assemblies →",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "b9e2d72b-1cda-49d7-b2ff-4cfde0aa011f",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 4160,
+        "y": 1420
+      }
+    },
+    {
+      "nodeId": "92ec8f46-0501-41ee-80e1-fe83cdfe7f16",
+      "type": "interactive",
+      "name": "Assembly: Salem p2",
+      "interactiveId": null,
+      "data": {
+        "body": "🗳️ *Select Your Assembly (Page 2/2)*\nDistrict: *Salem*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "94b47d01-a826-4254-83db-69a44997f133",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Salem Assemblies",
+              "rows": [
+                {
+                  "id": "1e5c223d-e135-4293-9bd7-ee1505a17ff0",
+                  "title": "Salem South",
+                  "description": ""
+                },
+                {
+                  "id": "3b066a7a-82f7-47d7-9a03-7e8b7dbb6be7",
+                  "title": "Veerapandi",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "128a3d92-0860-4697-bff3-df027858c458",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 4160,
+        "y": 1420
+      }
+    },
+    {
+      "nodeId": "91d41593-8496-44d2-9d13-5526f53aad1c",
+      "type": "interactive",
+      "name": "Assembly: Sivaganga p1",
+      "interactiveId": "86e52715-bbab-4154-893e-77fe9c1a6321",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Sivaganga*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "6d66e09e-cd5e-49f9-ad71-ec0ce5d5dc9c",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Sivaganga Assemblies",
+              "rows": [
+                {
+                  "id": "a04d99f6-7dba-4e10-8d7b-813052b2368f",
+                  "title": "Karaikudi",
+                  "description": ""
+                },
+                {
+                  "id": "666c1d22-0fa9-45e2-880a-cc0ff51354e1",
+                  "title": "Tiruppattur",
+                  "description": ""
+                },
+                {
+                  "id": "b6efc829-7225-4ff8-ab4f-9d7fb029c188",
+                  "title": "Sivaganga",
+                  "description": ""
+                },
+                {
+                  "id": "67427497-e4d4-4daf-bb47-47b16b568bc3",
+                  "title": "Manamadurai",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "b9e2d72b-1cda-49d7-b2ff-4cfde0aa011f",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 4680,
+        "y": 1420
+      }
+    },
+    {
+      "nodeId": "36e71492-b86f-4df6-99fc-d4101da5f528",
+      "type": "interactive",
+      "name": "Assembly: Tenkasi p1",
+      "interactiveId": "fc06ad3d-b385-4389-aeb6-897752f1b579",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Tenkasi*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "1ac766c1-cb1f-4af3-9731-b03bb2756c09",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Tenkasi Assemblies",
+              "rows": [
+                {
+                  "id": "446d0c5e-50ce-4a98-aaff-6c298f8c8dee",
+                  "title": "Sankarankovil",
+                  "description": ""
+                },
+                {
+                  "id": "cc49df6e-b990-4049-83cf-a664b9e9f1f3",
+                  "title": "Vasudevanallur",
+                  "description": ""
+                },
+                {
+                  "id": "a37164e8-16e7-4cbf-aefc-50bd51b6fdef",
+                  "title": "Kadayanallur",
+                  "description": ""
+                },
+                {
+                  "id": "0bb46099-ae7f-4ec2-b16d-e0662c3b4ab2",
+                  "title": "Tenkasi",
+                  "description": ""
+                },
+                {
+                  "id": "b25778c9-6063-4cf1-9b54-a22155e59101",
+                  "title": "Alangulam",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "b9e2d72b-1cda-49d7-b2ff-4cfde0aa011f",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 5200,
+        "y": 1420
+      }
+    },
+    {
+      "nodeId": "d2c78826-00c8-4fe0-8237-618aae4eb5dc",
+      "type": "interactive",
+      "name": "Assembly: Thanjavur p1",
+      "interactiveId": "677b43a6-beda-4533-983b-ec9a16f305eb",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Thanjavur*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "f14edcb8-503b-4e7a-a28d-e40f4f49ae70",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Thanjavur Assemblies",
+              "rows": [
+                {
+                  "id": "a414f4b6-0838-4ece-9cc1-4a3b30c19076",
+                  "title": "Thiruvidaimarudur",
+                  "description": ""
+                },
+                {
+                  "id": "1bde6f43-89be-4937-b9be-9209f6ac1f78",
+                  "title": "Kumbakonam",
+                  "description": ""
+                },
+                {
+                  "id": "64b23dcc-3643-4f5f-baf0-67f7f1dfc966",
+                  "title": "Papanasam",
+                  "description": ""
+                },
+                {
+                  "id": "1e8c7570-ba1c-47c4-a42f-a4165eb05aae",
+                  "title": "Thiruvaiyaru",
+                  "description": ""
+                },
+                {
+                  "id": "93b46ffa-9384-4736-b7bb-6aed07cd9121",
+                  "title": "Thanjavur",
+                  "description": ""
+                },
+                {
+                  "id": "68f341f9-90f5-4e5f-aa2a-8209f7541613",
+                  "title": "Orathanadu",
+                  "description": ""
+                },
+                {
+                  "id": "513acd9f-fa51-40cf-a5b2-e5f434cc2aef",
+                  "title": "Pattukkottai",
+                  "description": ""
+                },
+                {
+                  "id": "8811dc9e-42e2-4a37-86a3-10fb41de91c6",
+                  "title": "Peravurani",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "b9e2d72b-1cda-49d7-b2ff-4cfde0aa011f",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 5720,
+        "y": 1420
+      }
+    },
+    {
+      "nodeId": "df305be3-1eee-4e8a-9b33-9623c5850c8d",
+      "type": "interactive",
+      "name": "Assembly: Theni p1",
+      "interactiveId": "601e3681-6708-41bd-bc05-57db013f5cd0",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Theni*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "351362f3-a58e-403b-8348-799d437f0a32",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Theni Assemblies",
+              "rows": [
+                {
+                  "id": "5d2005f1-b763-4bfa-acc1-b6196a961fff",
+                  "title": "Andipatti",
+                  "description": ""
+                },
+                {
+                  "id": "4a094515-b28a-472f-a649-44413c2d9b82",
+                  "title": "Periyakulam",
+                  "description": ""
+                },
+                {
+                  "id": "f129c0dc-a89b-4830-959e-f747d2c68951",
+                  "title": "Bodinayakanur",
+                  "description": ""
+                },
+                {
+                  "id": "3d57f078-537b-4bbf-9020-fe1935ab1728",
+                  "title": "Cumbum",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "b9e2d72b-1cda-49d7-b2ff-4cfde0aa011f",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 6240,
+        "y": 1420
+      }
+    },
+    {
+      "nodeId": "19de1e07-18e8-4949-b038-ab286bba7ad6",
+      "type": "interactive",
+      "name": "Assembly: Thoothukudi p1",
+      "interactiveId": "7918ec33-31e5-41c1-9bdc-7c3249aa85be",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Thoothukudi*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "045c9d88-f30f-4b6a-be4e-e4a126c33761",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Thoothukudi Assemblies",
+              "rows": [
+                {
+                  "id": "91e67c5e-9b0b-47a2-9de4-98d444703556",
+                  "title": "Vilathikulam",
+                  "description": ""
+                },
+                {
+                  "id": "52fddee9-37aa-4640-81a4-729fc302cd12",
+                  "title": "Thoothukkudi",
+                  "description": ""
+                },
+                {
+                  "id": "fcca1037-977b-44e8-8077-4d91aee3524d",
+                  "title": "Tiruchendur",
+                  "description": ""
+                },
+                {
+                  "id": "77e82eb2-b8f9-4dd5-88b8-15f652724add",
+                  "title": "Srivaikuntam",
+                  "description": ""
+                },
+                {
+                  "id": "52490b2c-9f58-42d4-81ac-ee7b2df2478e",
+                  "title": "Ottapidaram",
+                  "description": ""
+                },
+                {
+                  "id": "7f99a3f1-77e0-46f0-b5c4-ad80111ce783",
+                  "title": "Kovilpatti",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "7d27b7c7-2e3f-427e-afe3-984eb1d2be7f",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 6760,
+        "y": 1420
+      }
+    },
+    {
+      "nodeId": "6bed2029-fe68-45e9-b0e8-d6af7c9fc112",
+      "type": "interactive",
+      "name": "Assembly: Tiruchirappalli p1",
+      "interactiveId": "badb8893-a071-432b-bc0e-0f1c6480a1eb",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Tiruchirappalli*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "9d941d5e-0737-4c50-960c-8b494f643a70",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Tiruchirappalli Assemblies",
+              "rows": [
+                {
+                  "id": "d1934d14-5b3c-4b0d-a619-460c02286ac9",
+                  "title": "Manapparai",
+                  "description": ""
+                },
+                {
+                  "id": "0a2c21aa-e9c1-489c-b3ff-886c886d0432",
+                  "title": "Srirangam",
+                  "description": ""
+                },
+                {
+                  "id": "f7260b91-34ee-4562-bf05-ab82d22c8358",
+                  "title": "Tiruchirappalli West",
+                  "description": ""
+                },
+                {
+                  "id": "3485302b-beb2-44f1-b0c1-3bcdfe62fed7",
+                  "title": "Tiruchirappalli East",
+                  "description": ""
+                },
+                {
+                  "id": "da1116b4-9853-4284-8ceb-daac315509ed",
+                  "title": "Thiruverumbur",
+                  "description": ""
+                },
+                {
+                  "id": "0ed26c4d-743f-4c5b-b36c-e9fc73429cb4",
+                  "title": "Lalgudi",
+                  "description": ""
+                },
+                {
+                  "id": "a0425e79-b9bf-4fab-9d5c-ea3ba9ac3811",
+                  "title": "Manachanallur",
+                  "description": ""
+                },
+                {
+                  "id": "aebb993a-07d8-4ee5-b3ec-164275c4c346",
+                  "title": "Musiri",
+                  "description": ""
+                },
+                {
+                  "id": "901a6259-8d2a-41db-ba5a-7298848da070",
+                  "title": "Thuraiyur",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "7d27b7c7-2e3f-427e-afe3-984eb1d2be7f",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 7280,
+        "y": 1420
+      }
+    },
+    {
+      "nodeId": "caceb1a8-c9b6-4ccf-9252-3cb74a9f8480",
+      "type": "interactive",
+      "name": "Assembly: Tirunelveli p1",
+      "interactiveId": "77abdaea-d410-4048-b25c-b002a01f48e2",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Tirunelveli*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "98442f34-c907-4632-97a4-3864640ffff8",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Tirunelveli Assemblies",
+              "rows": [
+                {
+                  "id": "d9cb6c64-a214-46ed-b1c9-48c4e029a07c",
+                  "title": "Tirunelveli",
+                  "description": ""
+                },
+                {
+                  "id": "4858f307-5b87-46bb-b00b-9c831536f15f",
+                  "title": "Ambasamudram",
+                  "description": ""
+                },
+                {
+                  "id": "4a313f56-d6ae-41b5-a67b-85583d9bb711",
+                  "title": "Palayamkottai",
+                  "description": ""
+                },
+                {
+                  "id": "aea31ffe-8031-4c4f-88e9-cb1ddc8d546a",
+                  "title": "Nanguneri",
+                  "description": ""
+                },
+                {
+                  "id": "0c54a91d-b0c4-4464-96b8-837f8a7d5fc9",
+                  "title": "Radhapuram",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "7d27b7c7-2e3f-427e-afe3-984eb1d2be7f",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 7800,
+        "y": 1420
+      }
+    },
+    {
+      "nodeId": "02d36705-ba71-4b83-8a64-b9677ad3acc7",
+      "type": "interactive",
+      "name": "Assembly: Tirupathur p1",
+      "interactiveId": "aab74936-695e-49de-9d36-6bcc65b41585",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Tirupathur*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "a5e9f106-67f4-40c7-aca9-792b7ff6cd53",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Tirupathur Assemblies",
+              "rows": [
+                {
+                  "id": "01d14d9a-8d97-4ec3-9dec-e53985d5f676",
+                  "title": "Vaniyambadi",
+                  "description": ""
+                },
+                {
+                  "id": "fa9761b3-dff8-4642-b29c-65f4766d0564",
+                  "title": "Ambur",
+                  "description": ""
+                },
+                {
+                  "id": "de11a9bb-61d8-4b0f-8f5d-bc93576c8b81",
+                  "title": "Jolarpet",
+                  "description": ""
+                },
+                {
+                  "id": "45d2cce9-cebb-461f-8bd7-95ccbdb90203",
+                  "title": "Tirupattur",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "7d27b7c7-2e3f-427e-afe3-984eb1d2be7f",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 3120,
+        "y": 1720
+      }
+    },
+    {
+      "nodeId": "5a14cb14-ce2f-4863-87cd-885684c8fd84",
+      "type": "interactive",
+      "name": "Assembly: Tiruppur p1",
+      "interactiveId": "306da1f3-b154-43ce-a4ca-4f8a9df7e6af",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Tiruppur*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "96440431-bf6c-42a6-9b9e-d6cc842341f8",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Tiruppur Assemblies",
+              "rows": [
+                {
+                  "id": "14368167-7834-4b1c-9104-27f80d69bd00",
+                  "title": "Dharapuram",
+                  "description": ""
+                },
+                {
+                  "id": "a6118125-b80a-4a3a-812c-555033565b6d",
+                  "title": "Kangayam",
+                  "description": ""
+                },
+                {
+                  "id": "6fb9c5b4-a2ce-46a2-9b79-fbc9f1edea89",
+                  "title": "Avanashi",
+                  "description": ""
+                },
+                {
+                  "id": "0e282f82-2a1c-4995-8072-57e01dc56f9c",
+                  "title": "Tiruppur North",
+                  "description": ""
+                },
+                {
+                  "id": "eb2aed66-a227-44cf-bf05-c713cc192383",
+                  "title": "Tiruppur South",
+                  "description": ""
+                },
+                {
+                  "id": "6dbb0668-bed7-4bb6-ac95-a6af342b476c",
+                  "title": "Palladam",
+                  "description": ""
+                },
+                {
+                  "id": "c726777e-5dab-4088-941c-d8c1078a9f9e",
+                  "title": "Udumalaipettai",
+                  "description": ""
+                },
+                {
+                  "id": "720a732c-0770-4a7e-a3eb-7b6ac2a802ca",
+                  "title": "Madathukulam",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "7d27b7c7-2e3f-427e-afe3-984eb1d2be7f",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 3640,
+        "y": 1720
+      }
+    },
+    {
+      "nodeId": "01edc97a-85a1-4a64-a99b-97dcc317125c",
+      "type": "interactive",
+      "name": "Assembly: Tiruvallur p1",
+      "interactiveId": "fdf4af0f-9539-4b48-bc97-a27a7f6d4a71",
+      "data": {
+        "body": "🗳️ *Select Your Assembly (Page 1/2)*\nDistrict: *Tiruvallur*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "7f1572f6-592f-4909-8c64-9edd595d3667",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Tiruvallur Assemblies",
+              "rows": [
+                {
+                  "id": "61597020-6c75-4c0d-8aae-6862bfc14e8f",
+                  "title": "Gummidipoondi",
+                  "description": ""
+                },
+                {
+                  "id": "8668879e-1d6b-4069-b89e-5b6d19d05b05",
+                  "title": "Ponneri",
+                  "description": ""
+                },
+                {
+                  "id": "bc165fa7-5043-432b-8246-c0c5778a4e12",
+                  "title": "Tiruttani",
+                  "description": ""
+                },
+                {
+                  "id": "6e1f2b42-da86-41df-a9b4-bba381fffdc9",
+                  "title": "Thiruvallur",
+                  "description": ""
+                },
+                {
+                  "id": "499c7bf0-0962-4b04-b4d1-2df62140ab59",
+                  "title": "Poonamallee",
+                  "description": ""
+                },
+                {
+                  "id": "c4ef1162-97a8-4464-8397-6964ba2f36e7",
+                  "title": "Avadi",
+                  "description": ""
+                },
+                {
+                  "id": "e9c2a376-863e-4454-9533-9a05d44dba21",
+                  "title": "Maduravoyal",
+                  "description": ""
+                },
+                {
+                  "id": "a562f78a-b2c4-442b-aea3-c08e0ab8126f",
+                  "title": "Ambattur",
+                  "description": ""
+                },
+                {
+                  "id": "de41455d-fb44-4b4d-bb80-c36d99dca067",
+                  "title": "Madavaram",
+                  "description": ""
+                },
+                {
+                  "id": "5c26dcca-a6f5-42e4-915f-f3e2151f2eee",
+                  "title": "More Assemblies →",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "7d27b7c7-2e3f-427e-afe3-984eb1d2be7f",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 4160,
+        "y": 1720
+      }
+    },
+    {
+      "nodeId": "bdc6cf47-01e4-42e9-a8a9-54e9532a0586",
+      "type": "interactive",
+      "name": "Assembly: Tiruvallur p2",
+      "interactiveId": null,
+      "data": {
+        "body": "🗳️ *Select Your Assembly (Page 2/2)*\nDistrict: *Tiruvallur*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "afa77881-2a11-486e-8b77-6a2f085bc02c",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Tiruvallur Assemblies",
+              "rows": [
+                {
+                  "id": "90342a39-85a2-4c56-afc6-d0f435c60bb2",
+                  "title": "Thiruvottiyur",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "01edc97a-85a1-4a64-a99b-97dcc317125c",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 4160,
+        "y": 1720
+      }
+    },
+    {
+      "nodeId": "e5c6c9e1-3e17-4c2a-b10f-e77c98e73c7d",
+      "type": "interactive",
+      "name": "Assembly: Tiruvannamalai p1",
+      "interactiveId": "a84d3ec0-15e3-4b54-8171-030a4925f657",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Tiruvannamalai*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "79be2800-2a8e-4b67-85e9-97efbe376fb2",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Tiruvannamalai Assemblies",
+              "rows": [
+                {
+                  "id": "dd4d5083-8585-4fe3-ac5d-7d36208ca668",
+                  "title": "Chengam",
+                  "description": ""
+                },
+                {
+                  "id": "44265a33-9187-4e06-baf2-3c4997893e87",
+                  "title": "Tiruvannamalai",
+                  "description": ""
+                },
+                {
+                  "id": "6bfd76a3-c966-4955-ae22-ad1a3e2692a1",
+                  "title": "Kilpennathur",
+                  "description": ""
+                },
+                {
+                  "id": "11e5a9fa-7b5f-4045-a934-25ca301df7c4",
+                  "title": "Kalasapakkam",
+                  "description": ""
+                },
+                {
+                  "id": "c7419a54-01b2-4809-87bf-2f8adf64bdeb",
+                  "title": "Polur",
+                  "description": ""
+                },
+                {
+                  "id": "b8aa2e63-6cb9-4384-9932-971afa971ce4",
+                  "title": "Arani",
+                  "description": ""
+                },
+                {
+                  "id": "6a7e2f7a-d1ac-49c6-9b95-7de7e048fcef",
+                  "title": "Cheyyar",
+                  "description": ""
+                },
+                {
+                  "id": "4d2dbd94-cb1e-44c6-ba6e-b90509499445",
+                  "title": "Vandavasi",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "7d27b7c7-2e3f-427e-afe3-984eb1d2be7f",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 4680,
+        "y": 1720
+      }
+    },
+    {
+      "nodeId": "f9fbf593-b25f-4238-99cd-77c30268bade",
+      "type": "interactive",
+      "name": "Assembly: Tiruvarur p1",
+      "interactiveId": "89011090-ba04-4f7e-97fe-927592586ec7",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Tiruvarur*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "0acbc30d-da3b-4337-93ad-2f96204137b3",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Tiruvarur Assemblies",
+              "rows": [
+                {
+                  "id": "6dd812c2-b729-489f-9ec0-ffe7019221ec",
+                  "title": "Thiruthuraipoondi",
+                  "description": ""
+                },
+                {
+                  "id": "81a46afb-8326-494b-9bf8-bf5d8dbc1e78",
+                  "title": "Mannargudi",
+                  "description": ""
+                },
+                {
+                  "id": "5cc3ef3a-8d16-421a-a2ae-b525cd66e045",
+                  "title": "Thiruvarur",
+                  "description": ""
+                },
+                {
+                  "id": "753759f1-64f2-497f-a255-4cf51d69999c",
+                  "title": "Nannilam",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "7d27b7c7-2e3f-427e-afe3-984eb1d2be7f",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 5200,
+        "y": 1720
+      }
+    },
+    {
+      "nodeId": "df64171c-c6ec-42c9-b3fa-23f248e15df3",
+      "type": "interactive",
+      "name": "Assembly: Vellore p1",
+      "interactiveId": "a9c5bb2f-bc76-41f8-8267-0bb6f9cda120",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Vellore*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "abf9df70-31b3-4dcb-9610-e71611027d5a",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Vellore Assemblies",
+              "rows": [
+                {
+                  "id": "fcd69120-cefd-4b81-a3f7-86c81f14c880",
+                  "title": "Katpadi",
+                  "description": ""
+                },
+                {
+                  "id": "88738079-e65f-4bf1-99c1-d8717ad5105f",
+                  "title": "Vellore",
+                  "description": ""
+                },
+                {
+                  "id": "00e08a22-4c5e-4f4b-9c4d-18124949d18c",
+                  "title": "Anaikattu",
+                  "description": ""
+                },
+                {
+                  "id": "e152b8ab-a172-4304-aab3-7ceeeb2ef5ad",
+                  "title": "Kilvaithinankuppam",
+                  "description": ""
+                },
+                {
+                  "id": "9a90ec51-ece1-4107-b92c-75c09e3be1aa",
+                  "title": "Gudiyattam",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "28630565-ecb7-455d-bf2b-90944c86f117",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 5720,
+        "y": 1720
+      }
+    },
+    {
+      "nodeId": "da0ec6ab-8334-49e1-921a-36c089173f40",
+      "type": "interactive",
+      "name": "Assembly: Viluppuram p1",
+      "interactiveId": "cc453dda-c6fa-4547-b5d8-997dad1cb49e",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Viluppuram*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "64ecb04c-d514-4c0b-8715-494322cf898c",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Viluppuram Assemblies",
+              "rows": [
+                {
+                  "id": "8cd8b620-7dcb-4407-b004-338cf5fe9e6f",
+                  "title": "Gingee",
+                  "description": ""
+                },
+                {
+                  "id": "675ecff1-09d4-4de7-9a62-7a91dc4fa5a2",
+                  "title": "Mailam",
+                  "description": ""
+                },
+                {
+                  "id": "15be60d0-5915-4c93-b7c6-2e63dd05b2bb",
+                  "title": "Tindivanam",
+                  "description": ""
+                },
+                {
+                  "id": "9dc12b22-9c70-471d-a9b6-db349d8fc9c2",
+                  "title": "Vanur",
+                  "description": ""
+                },
+                {
+                  "id": "6612a6ce-a676-47e0-9570-187598d58135",
+                  "title": "Viluppuram",
+                  "description": ""
+                },
+                {
+                  "id": "2158838c-dd1b-49d4-8b5d-66a9719cedf7",
+                  "title": "Vikravandi",
+                  "description": ""
+                },
+                {
+                  "id": "05615e89-3ad2-4d60-8736-2b6c68d440f9",
+                  "title": "Tirukkoyilur",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "28630565-ecb7-455d-bf2b-90944c86f117",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 6240,
+        "y": 1720
+      }
+    },
+    {
+      "nodeId": "215d460c-071f-4b60-bf38-a2f84bb5cf78",
+      "type": "interactive",
+      "name": "Assembly: Virudhunagar p1",
+      "interactiveId": "9cab56f3-a064-4ed0-bae1-aef4e6d87430",
+      "data": {
+        "body": "🗳️ *Select Your Assembly*\nDistrict: *Virudhunagar*",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "8782989f-0bf2-422c-a449-1532da495583",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Virudhunagar Assemblies",
+              "rows": [
+                {
+                  "id": "5ac38bcc-bd68-4158-b1e9-4b4c13c4ef12",
+                  "title": "Rajapalayam",
+                  "description": ""
+                },
+                {
+                  "id": "0969e355-2cef-42cc-83fc-6602f6c791c7",
+                  "title": "Srivilliputhur",
+                  "description": ""
+                },
+                {
+                  "id": "948ba484-7bf3-46f7-bf02-a4482d273cf0",
+                  "title": "Sattur",
+                  "description": ""
+                },
+                {
+                  "id": "23e3c647-95a5-4fe6-8c1b-501f57eee49e",
+                  "title": "Sivakasi",
+                  "description": ""
+                },
+                {
+                  "id": "8688c805-af83-4392-98a8-25f7c67ab7ac",
+                  "title": "Virudhunagar",
+                  "description": ""
+                },
+                {
+                  "id": "c2b8eec1-3a49-44ac-b84b-188a38d6d8dc",
+                  "title": "Aruppukkottai",
+                  "description": ""
+                },
+                {
+                  "id": "8fa01815-8e57-4360-9f7c-4d068644bfff",
+                  "title": "Tiruchuli",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "28630565-ecb7-455d-bf2b-90944c86f117",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 6760,
+        "y": 1720
+      }
+    },
+    {
+      "nodeId": "5350059c-5c51-47a2-ae4e-ae6f5aa46b93",
+      "type": "interactive",
+      "name": "Select Schemes — Page 1/4",
+      "interactiveId": null,
+      "data": {
+        "body": "🎯 *Select Schemes* (Page 1 of 4)\n\nTap a scheme to add it. You can pick from multiple pages.\nTap *Done Selecting* when finished.",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "d97b87ac-c06a-4e46-ac65-3cd52bbeee55",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Schemes — Page 1",
+              "rows": [
+                {
+                  "id": "66b3adf4-313e-4bea-aaae-3c8b2756edff",
+                  "title": "e-Shram",
+                  "description": "Worker ID card + ₹2L free accident insurance"
+                },
+                {
+                  "id": "09d3bc00-6007-40a5-bb4d-d8b8045088cc",
+                  "title": "ABHA",
+                  "description": "Free 14-digit digital health ID"
+                },
+                {
+                  "id": "728c992e-525e-4675-9eae-5d3dc5f2f4cd",
+                  "title": "Udyam",
+                  "description": "Free MSME registration certificate"
+                },
+                {
+                  "id": "2547eb94-3c78-4585-9ba2-47c4d175a325",
+                  "title": "PMSBY",
+                  "description": "₹2L accident cover — ₹20/year"
+                },
+                {
+                  "id": "69db7e72-be58-4cfe-9dea-cc52ebea8e2a",
+                  "title": "PMJJBY",
+                  "description": "₹2L life insurance — ₹436/year"
+                },
+                {
+                  "id": "5d4bdaa3-ad86-4df7-95f4-3b45811550e5",
+                  "title": "Jan Dhan",
+                  "description": "Zero-balance bank account + RuPay card"
+                },
+                {
+                  "id": "c0b7054b-cc7e-47d6-b4b6-7460260ff89c",
+                  "title": "PM-POSHAN Tracker",
+                  "description": "Free school meals, uniforms & textbooks"
+                },
+                {
+                  "id": "441ff69e-202b-428a-b6c8-ca0413388cd9",
+                  "title": "Ayushman Bharat",
+                  "description": "₹5L/year cashless hospitalisation"
+                },
+                {
+                  "id": "27dfa352-ee70-40bc-8dac-4170585d92a1",
+                  "title": "✅ Done Selecting",
+                  "description": "Complete registration with selected schemes"
+                },
+                {
+                  "id": "700d4ed6-0ebe-4b9a-b267-a5edd4ca351a",
+                  "title": "More Schemes → (Page 2/4)",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [
+        "Schemes",
+        "Select Schemes",
+        "More Schemes",
+        "Pick Schemes",
+        "schemes"
+      ],
+      "parentNodeId": null,
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": -240,
+        "y": 400
+      }
+    },
+    {
+      "nodeId": "f4c6b002-c9f3-4e77-bcd3-d4d5f4faa628",
+      "type": "interactive",
+      "name": "Select Schemes — Page 2/4",
+      "interactiveId": "700d4ed6-0ebe-4b9a-b267-a5edd4ca351a",
+      "data": {
+        "body": "🎯 *Select Schemes* (Page 2 of 4)\n\nTap a scheme to add it. You can pick from multiple pages.\nTap *Done Selecting* when finished.",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "bb32dd57-8826-4665-9462-8ecec20baff1",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Schemes — Page 2",
+              "rows": [
+                {
+                  "id": "e38d1127-c240-4f71-886b-62baa8d4e9bc",
+                  "title": "Ayushman 70+",
+                  "description": "₹5L/year health cover — seniors 70+"
+                },
+                {
+                  "id": "466e6c55-5bda-4c0f-94bf-9604c73c7f27",
+                  "title": "PM Kisan",
+                  "description": "₹6,000/year direct cash to farmers"
+                },
+                {
+                  "id": "22d6edcb-4c19-4b27-9319-01682be5b777",
+                  "title": "PM Matru Vandana",
+                  "description": "₹5,000 cash — pregnant/lactating mothers"
+                },
+                {
+                  "id": "a2b23f50-6aed-49d2-a7c4-040adc5257ec",
+                  "title": "APY",
+                  "description": "Pension ₹1K–5K/month after age 60"
+                },
+                {
+                  "id": "6d989bce-46e1-4af3-81c6-0494ddd6d5bb",
+                  "title": "NAPS",
+                  "description": "Govt stipend up to ₹1,500/month — trainees"
+                },
+                {
+                  "id": "b58d7c42-5494-4bab-a9a7-d03447561374",
+                  "title": "PMKVY",
+                  "description": "Free skill training — 300+ trades"
+                },
+                {
+                  "id": "bc8494ef-0b27-456f-88b1-1320d882a711",
+                  "title": "PM Kisan Maan Dhan",
+                  "description": "Farmer pension ₹3,000/month after 60"
+                },
+                {
+                  "id": "aed5b173-a813-428d-b8c2-f4bdbc74e92b",
+                  "title": "NSP Scholarship",
+                  "description": "Scholarships Class 1 to PhD — DBT"
+                },
+                {
+                  "id": "7ef4f0a9-ab50-4e27-867c-6027416d9a19",
+                  "title": "✅ Done Selecting",
+                  "description": "Complete registration with selected schemes"
+                },
+                {
+                  "id": "3fe49830-4bc6-4128-9053-d63fc0aa1a5d",
+                  "title": "More Schemes → (Page 3/4)",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "5350059c-5c51-47a2-ae4e-ae6f5aa46b93",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 280,
+        "y": 400
+      }
+    },
+    {
+      "nodeId": "1e50ca0d-3b06-4c73-a34c-107cb4665249",
+      "type": "interactive",
+      "name": "Select Schemes — Page 3/4",
+      "interactiveId": "3fe49830-4bc6-4128-9053-d63fc0aa1a5d",
+      "data": {
+        "body": "🎯 *Select Schemes* (Page 3 of 4)\n\nTap a scheme to add it. You can pick from multiple pages.\nTap *Done Selecting* when finished.",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "e4ef166e-6f3a-4184-a258-6fa0f4c3d295",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Schemes — Page 3",
+              "rows": [
+                {
+                  "id": "d6f4e6c7-b777-44f8-9aee-7ff2ec630dd8",
+                  "title": "PM-YASASVI",
+                  "description": "Scholarship ₹75K–₹1.25L/year — school"
+                },
+                {
+                  "id": "9ead0f04-7e39-4f9d-85f3-9448855f5e52",
+                  "title": "NMMS",
+                  "description": "₹12,000/year — Class 9 to 12"
+                },
+                {
+                  "id": "a129ed64-1c3d-4567-a9a4-098eebc45285",
+                  "title": "KCC",
+                  "description": "Revolving credit up to ₹3L at 4%"
+                },
+                {
+                  "id": "e47c892a-e645-4b84-b0b1-a25b51923bfc",
+                  "title": "DAY-NRLM",
+                  "description": "Fund ₹15K–₹1.5L for Self-Help Groups"
+                },
+                {
+                  "id": "9ac3e9fc-e38c-406b-8bda-532204faec9d",
+                  "title": "Sukanya Samriddhi",
+                  "description": "8.2% tax-free savings — girl child"
+                },
+                {
+                  "id": "24248fb5-33a9-461b-a38b-bfca56c7bacd",
+                  "title": "PM Ujjwala",
+                  "description": "Free LPG connection + cylinder subsidies"
+                },
+                {
+                  "id": "736a3ed7-1506-4297-b047-5600155c1309",
+                  "title": "PM SVANidhi",
+                  "description": "Loan ₹10K–₹50K — street vendors"
+                },
+                {
+                  "id": "798e2674-1abf-41dc-82ff-6710b908cd7a",
+                  "title": "PM Surya Ghar",
+                  "description": "Solar subsidy ₹78K + 300 units free/month"
+                },
+                {
+                  "id": "f8a86c79-5894-49c7-baa9-27111802929c",
+                  "title": "✅ Done Selecting",
+                  "description": "Complete registration with selected schemes"
+                },
+                {
+                  "id": "ed5e4127-89c8-48de-8e14-f219e57eeff9",
+                  "title": "More Schemes → (Page 4/4)",
+                  "description": ""
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "f4c6b002-c9f3-4e77-bcd3-d4d5f4faa628",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 800,
+        "y": 400
+      }
+    },
+    {
+      "nodeId": "b6702d1d-b021-4e2e-8fdc-d5f394fc1b02",
+      "type": "interactive",
+      "name": "Select Schemes — Page 4/4",
+      "interactiveId": "ed5e4127-89c8-48de-8e14-f219e57eeff9",
+      "data": {
+        "body": "🎯 *Select Schemes* (Page 4 of 4)\n\nTap a scheme to add it. You can pick from multiple pages.\nTap *Done Selecting* when finished.",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "ace99385-8e77-4ec1-8464-67cccdecb73c",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Schemes — Page 4",
+              "rows": [
+                {
+                  "id": "c8bacf79-f274-407e-b709-3ed949b4a684",
+                  "title": "PM-KUSUM",
+                  "description": "60% subsidy — solar agricultural pumps"
+                },
+                {
+                  "id": "c91cf3bb-f1e3-415a-adb3-391347bbce61",
+                  "title": "PMMSY",
+                  "description": "Subsidy 40%–60% — boats, aquaculture"
+                },
+                {
+                  "id": "51f5aed7-f024-4212-9f03-4e6ce07c0f48",
+                  "title": "PM-FME",
+                  "description": "35% subsidy up to ₹10L — food enterprises"
+                },
+                {
+                  "id": "f4855087-9a47-4363-939a-c07232171d1d",
+                  "title": "PM Mudra",
+                  "description": "Collateral-free loan up to ₹5L"
+                },
+                {
+                  "id": "97624e2b-71d1-4d2d-af8c-ac037a5d5a99",
+                  "title": "PM Awas Yojana",
+                  "description": "Housing grant ₹1.2L–₹2.67L"
+                },
+                {
+                  "id": "67a8f8e5-eb53-4b3c-a6c3-1d7bda2fdb87",
+                  "title": "Stand Up India",
+                  "description": "Loan ₹10L–₹1Cr — SC/ST & women"
+                },
+                {
+                  "id": "c52b4964-d57e-4d12-9b87-f5b346c33e3e",
+                  "title": "PM Fasal Bima",
+                  "description": "Crop insurance — natural calamities"
+                },
+                {
+                  "id": "a588786c-d4d6-457c-accf-7990968396f2",
+                  "title": "PMEGP",
+                  "description": "Credit subsidy up to 35% — new enterprise"
+                },
+                {
+                  "id": "41e48f43-7660-4cd7-b10f-6131fa1999fb",
+                  "title": "✅ Done Selecting",
+                  "description": "Complete registration with selected schemes"
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Choose"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [],
+      "parentNodeId": "1e50ca0d-3b06-4c73-a34c-107cb4665249",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 1320,
+        "y": 400
+      }
+    }
+  ]
+}

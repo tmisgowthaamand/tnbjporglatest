@@ -1,0 +1,136 @@
+{
+  "chatbot": {
+    "name": "BJP Typed Text Test"
+  },
+  "nodes": [
+    {
+      "nodeId": "root",
+      "type": "interactive",
+      "name": "Typed Test: Start",
+      "interactiveId": null,
+      "data": {
+        "body": "🧪 *Typed-text test — step 1*\n\n1️⃣ Type any word (e.g. *TNA1234567*) and send it.\n2️⃣ Then open the list below and tap *Continue ✅*.",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "a295b740-6ad4-400d-9003-f9db75d5ca63",
+                "title": "Button 1"
+              }
+            }
+          ],
+          "sections": [
+            {
+              "title": "Test",
+              "rows": [
+                {
+                  "id": "555f2c5f-da0f-4abe-aa7f-497bc5e0549a",
+                  "title": "Continue ✅",
+                  "description": "Tap after you have typed a word"
+                }
+              ]
+            }
+          ],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": "Open"
+        },
+        "interactiveType": "list"
+      },
+      "keywords": [
+        "typetest",
+        "Typetest",
+        "TYPETEST"
+      ],
+      "parentNodeId": null,
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 0,
+        "y": 0
+      }
+    },
+    {
+      "nodeId": "1494b184-60b9-4871-a5ce-d0cab9da02a5",
+      "type": "interactive",
+      "name": "Typed Test: Continue received",
+      "interactiveId": null,
+      "data": {
+        "body": "✅ *Step 2 reached*\n\nThe list tap after typing worked.\n\nNow type another word, send it, then tap *Restart test* below.",
+        "header": {
+          "type": "none",
+          "text": ""
+        },
+        "footer": "",
+        "action": {
+          "buttons": [
+            {
+              "type": "reply",
+              "reply": {
+                "id": "3c6a0458-3453-4817-8801-2999b09216c1",
+                "title": "Restart test",
+                "payload": ""
+              }
+            }
+          ],
+          "sections": [],
+          "dynamicRows": {
+            "enabled": false
+          },
+          "button": ""
+        },
+        "interactiveType": "button",
+        "enabledNotify": false,
+        "notifyConfig": {}
+      },
+      "keywords": [],
+      "parentNodeId": "root",
+      "assignedAgent": null,
+      "assignedAgents": [],
+      "enabledNotify": false,
+      "notifyConfig": {},
+      "funnelStageConfig": {
+        "enabled": false
+      },
+      "variableConfig": {},
+      "canvasPosition": {
+        "x": 520,
+        "y": 0
+      }
+    }
+  ],
+  "edges": [
+    {
+      "fromNodeId": "root",
+      "toNodeId": "1494b184-60b9-4871-a5ce-d0cab9da02a5",
+      "keywords": [
+        "Continue ✅"
+      ],
+      "intentName": "Continue ✅",
+      "delay": 0
+    },
+    {
+      "fromNodeId": "1494b184-60b9-4871-a5ce-d0cab9da02a5",
+      "toNodeId": "root",
+      "keywords": [
+        "Restart test"
+      ],
+      "intentName": "Restart test",
+      "delay": 0
+    }
+  ],
+  "manualResolution": []
+}

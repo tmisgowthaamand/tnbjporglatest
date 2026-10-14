@@ -1,0 +1,29 @@
+--- live/controllers/bjpWactoController.js
++++ new/controllers/bjpWactoController.js
+@@ -50,7 +50,13 @@
+ };
+ // Answered by WACTO nodes (or plain chit-chat) — the backend stays quiet.
+ const QUIET = /^(hi+|hello+|hey+|start|menu|ok|okay|thanks?|thank you|support|main menu)$/i;
+-const NAV   = /^More (Districts|Assemblies|Schemes)/;
++const NAV   = /^More (Districts|Assemblies|Schemes|in )/;
++// v8c flow shows district rows as "<Name> District" (WACTO keeps one destination per title,
++// and 23 districts share a name with an assembly); older flows sent the plain name.
++const districtFromLabel = (label) => {
++  const name = String(label).replace(/\s+District$/, '');
++  return DISTRICT_ASSEMBLIES[name] ? name : null;
++};
+ const SCHEME_TITLE_SET = new Set(SCHEME_TITLES);
+ 
+ // Normalize WhatsApp phone → 10-digit mobile (same as waHelpers.js last10)
+@@ -518,8 +524,9 @@
+     if (process.env.BJP_WACTO_ASSEMBLY_WHATNEXT === 'backend') return sendWhatNext(phone, mobile, '📍 *Almost done!*');
+     return undefined;
+   }
+-  if (DISTRICT_ASSEMBLIES[label]) {
+-    await saveSession(mobile, { district: label, assembly: '', voter: null });
++  const district = districtFromLabel(label);
++  if (district) {
++    await saveSession(mobile, { district, assembly: '', voter: null });
+   }
+ }
+ 
